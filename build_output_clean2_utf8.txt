@@ -1,0 +1,55 @@
+﻿
+> temp-next@0.1.0 build
+> next build
+
+鈻?Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+鉁?Compiled successfully in 3.7s
+  Running TypeScript ...
+  Collecting page data using 19 workers ...
+  Generating static pages using 19 workers (0/10) ...
+node.exe : The width(-1) and height(-1) of chart
+ should be greater than 0,
+所在位置 行:1 字符: 1
++ & "D:\Program Files\nodejs/node.exe" "D:\Progr
+am Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Th 
+   e width(-1) a...greater than 0,:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+       please check the style of container, or t
+he props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefin
+ed) or use aspect(undefined) to control the
+       height and width.
+The width(-1) and height(-1) of chart should be 
+greater than 0,
+       please check the style of container, or t
+he props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefin
+ed) or use aspect(undefined) to control the
+       height and width.
+  Generating static pages using 19 workers (2/10) 
+  Generating static pages using 19 workers (4/10) 
+  Generating static pages using 19 workers (7/10) 
+鉁?Generating static pages using 19 workers (10/10) in 525.2ms
+  Finalizing page optimization ...
+
+Route (app)
+鈹?鈼?/
+鈹?鈼?/_not-found
+鈹?鈼?/home
+鈹?鈼?/login
+鈹?鈼?/plan-generation
+鈹?鈼?/profile
+鈹?鈼?/roles
+鈹?鈼?/self-cognition
+
+
+鈼? (Static)  prerendered as static content
+

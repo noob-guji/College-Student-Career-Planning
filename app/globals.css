@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-900: #1e3a8a;
+  --color-neu-bg: #f4f7f8;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer components {
+
+  /* Neumorphism shadows */
+  .neu-flat {
+    box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.5), -8px -8px 16px rgba(255, 255, 255, 0.8);
+  }
+
+  .neu-pressed {
+    box-shadow: inset 8px 8px 16px rgba(163, 177, 198, 0.5), inset -8px -8px 16px rgba(255, 255, 255, 0.8);
+  }
+
+  /* Inverse border radius effect for active sidebar item */
+  .sidebar-active-item {
+    position: relative;
+    background-color: #F8FAFC;
+    color: #F59E0B;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    z-index: 10;
+  }
+
+  /* Top concave corner */
+  .sidebar-active-item::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border-bottom-right-radius: 25px;
+    box-shadow: 5px 5px 0 5px #F8FAFC;
+    pointer-events: none;
+  }
+
+  /* Bottom concave corner */
+  .sidebar-active-item::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border-top-right-radius: 25px;
+    box-shadow: 5px -5px 0 5px #F8FAFC;
+    pointer-events: none;
+  }
+}
