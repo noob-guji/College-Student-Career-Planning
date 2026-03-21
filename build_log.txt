@@ -1,0 +1,396 @@
+﻿鈻?Next.js 16.1.6 (Turbopack)
+- Environments: .env
+
+node.exe : 鈿?The "middleware" file conve
+ntion is deprecated. Please use "proxy" 
+instead. Learn more: https://nextjs.org/
+docs/messages/middleware-to-proxy
+所在位置 行:1 字符: 1
++ & "D:\Program Files\nodejs/node.exe" "
+D:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecif 
+   ied: (鈿?The "middlewa...leware-to-p  
+  roxy:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCom 
+   mandError
+ 
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 10 er
+rors:
+./src/app/(dashboard)/person-post-matchi
+ng/page.tsx
+Reading source code for parsing failed
+An unexpected error happened while tryin
+g to read the source code to parse: fail
+ed to convert rope into string
+
+Caused by:
+- invalid utf-8 sequence of 2 bytes from
+ index 460
+
+
+./src/app/(dashboard)/roles/page.tsx
+Reading source code for parsing failed
+An unexpected error happened while tryin
+g to read the source code to parse: fail
+ed to convert rope into string
+
+Caused by:
+- invalid utf-8 sequence of 2 bytes from
+ index 1044
+
+
+./src/app/(dashboard)/self-cognition/pag
+e.tsx
+Reading source code for parsing failed
+An unexpected error happened while tryin
+g to read the source code to parse: fail
+ed to convert rope into string
+
+Caused by:
+- invalid utf-8 sequence of 2 bytes from
+ index 2199
+
+
+./src/app/api/auth/register/route.ts
+Reading source code for parsing failed
+An unexpected error happened while tryin
+g to read the source code to parse: fail
+ed to convert rope into string
+
+Caused by:
+- invalid utf-8 sequence of 2 bytes from
+ index 493
+
+
+./src/app/(dashboard)/layout.tsx:2:1
+Module not found: Can't resolve '@/compo
+nents/layout/Header'
+[0m [90m 1 |[39m [36mimport[39m [3
+3mSidebar[39m [36mfrom[39m [32m'@/co
+mponents/layout/Sidebar'[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36m
+import[39m [33mHeader[39m [36mfrom[
+39m [32m'@/components/layout/Header'[3
+9m
+ [90m   |[39m [31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mexport[39m [36mde
+fault[39m [36mfunction[39m [33mDashb
+oardLayout[39m({
+ [90m 5 |[39m     children[33m,[39m
+[0m
+
+Import map: aliased to relative './compo
+nents/layout/Header' inside of [project]
+/
+
+
+https://nextjs.org/docs/messages/module-
+not-found
+
+
+./src/app/(dashboard)/layout.tsx:1:1
+Module not found: Can't resolve '@/compo
+nents/layout/Sidebar'
+[0m[31m[1m>[22m[39m[90m 1 |[39m 
+[36mimport[39m [33mSidebar[39m [36mf
+rom[39m [32m'@/components/layout/Sideb
+ar'[39m
+ [90m   |[39m [31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mimport[39m [33mHe
+ader[39m [36mfrom[39m [32m'@/compone
+nts/layout/Header'[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mexport[39m [36mde
+fault[39m [36mfunction[39m [33mDashb
+oardLayout[39m({[0m
+
+Import map: aliased to relative './compo
+nents/layout/Sidebar' inside of [project
+]/
+
+
+https://nextjs.org/docs/messages/module-
+not-found
+
+
+./src/app/layout.tsx:4:1
+Module not found: Can't resolve '@/featu
+res/auth/components/AuthProvider'
+[0m [90m 2 |[39m [36mimport[39m { 
+[33mInter[39m } [36mfrom[39m [32m'ne
+xt/font/google'[39m
+ [90m 3 |[39m [36mimport[39m [32m'.
+/globals.css'[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36m
+import[39m [33mAuthProvider[39m [36m
+from[39m [32m'@/features/auth/componen
+ts/AuthProvider'[39m
+ [90m   |[39m [31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m [36mconst[39m inter [
+33m=[39m [33mInter[39m({ subsets[33m
+:[39m [[32m'latin'[39m] })
+ [90m 7 |[39m[0m
+
+Import map: aliased to relative './featu
+res/auth/components/AuthProvider' inside
+ of [project]/
+
+
+https://nextjs.org/docs/messages/module-
+not-found
+
+
+./src/app/(auth)/auth/page.tsx:1:1
+Module not found: Can't resolve '@/featu
+res/auth/components/SlidingAuth'
+[0m[31m[1m>[22m[39m[90m 1 |[39m 
+[36mimport[39m [33mSlidingAuth[39m [
+36mfrom[39m [32m"@/features/auth/compo
+nents/SlidingAuth"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m
+ [90m 3 |[39m [36mexport[39m [36mde
+fault[39m [36mfunction[39m [33mAuthP
+age[39m() {
+ [90m 4 |[39m     [36mreturn[39m [3
+3m<[39m[33mSlidingAuth[39m [33m/[39
+m[33m>[39m[33m;[39m[0m
+
+Import map: aliased to relative './featu
+res/auth/components/SlidingAuth' inside 
+of [project]/
+
+
+https://nextjs.org/docs/messages/module-
+not-found
+
+
+./src/app/api/auth/[...nextauth]/route.t
+s:1:1
+Module not found: Can't resolve '@/lib/a
+uth'
+[0m[31m[1m>[22m[39m[90m 1 |[39m 
+[36mimport[39m { handlers } [36mfrom[
+39m [32m"@/lib/auth"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mexport[39m [36mco
+nst[39m { [33mGET[39m[33m,[39m [33
+mPOST[39m } [33m=[39m handlers
+ [90m 3 |[39m[0m
+
+Import map: aliased to relative './lib/a
+uth' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-
+not-found
+
+
+./src/middleware.ts:2:1
+Module not found: Can't resolve '@/lib/a
+uth.config'
+[0m [90m 1 |[39m [36mimport[39m [3
+3mNextAuth[39m [36mfrom[39m [32m"nex
+t-auth"[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36m
+import[39m { authConfig } [36mfrom[39
+m [32m"@/lib/auth.config"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mexport[39m [36mde
+fault[39m [33mNextAuth[39m(authConfig
+)[33m.[39mauth
+ [90m 5 |[39m[0m
+
+Import map: aliased to relative './lib/a
+uth.config' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-
+not-found
+
+
+    at <unknown> (./src/app/(dashboard)/
+layout.tsx:2:1)
+    at <unknown> (https://nextjs.org/doc
+s/messages/module-not-found)
+    at <unknown> (./src/app/(dashboard)/
+layout.tsx:1:1)
+    at <unknown> (https://nextjs.org/doc
+s/messages/module-not-found)
+    at <unknown> (./src/app/layout.tsx:4
+:1)
+    at <unknown> (https://nextjs.org/doc
+s/messages/module-not-found)
+    at <unknown> (./src/app/(auth)/auth/
+page.tsx:1:1)
+    at <unknown> (https://nextjs.org/doc
+s/messages/module-not-found)
+    at <unknown> (./src/app/api/auth/[..
+.nextauth]/route.ts:1:1)
+    at <unknown> (https://nextjs.org/doc
+s/messages/module-not-found)
+    at <unknown> (./src/middleware.ts:2:
+1)
+    at <unknown> (https://nextjs.org/doc
+s/messages/module-not-found)

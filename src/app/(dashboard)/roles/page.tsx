@@ -1,0 +1,99 @@
+'use client';
+
+import { useState } from 'react';
+import JobProfileCard from '@/features/jobs/components/JobProfileCard';
+import JobKnowledgeGraph from '@/features/jobs/components/JobKnowledgeGraph';
+import { ArrowLeftRight, ArrowUpDown, Briefcase } from 'lucide-react';
+import { jobsData, jobList } from '@/data/jobsData';
+
+
+export default function CareerCognition() {
+    const [viewMode, setViewMode] = useState<'vertical' | 'horizontal'>('vertical');
+    const [selectedJob, setSelectedJob] = useState<string>(jobList[0]);
+
+    const selectedJobData = jobsData[selectedJob];
+
+    return (
+        <div className="space-y-6 max-w-[1600px] w-full mx-auto h-[max(100%,_700px)] flex flex-col px-4 sm:px-6 lg:px-8 pb-6">
+            <div className="flex justify-between items-center shrink-0">
+                <div>
+                    <h2 className="text-2xl font-bold text-slate-900">岗位认知中心</h2>
+                    <p className="text-sm text-slate-500 mt-1">深入了解岗位要求，探索职业发展路径和知识图谱</p>
+                </div>
+
+                <div className="flex bg-slate-100 p-1 rounded-lg">
+                    <button
+                        onClick={() => setViewMode('vertical')}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${viewMode === 'vertical'
+                            ? 'bg-white text-[#F59E0B] shadow-sm'
+                            : 'text-[#111827] hover:text-[#000000]'
+                            }`}
+                    >
+                        <ArrowUpDown className="w-4 h-4" />
+                        纵向布局
+                    </button>
+                    <button
+                        onClick={() => setViewMode('horizontal')}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${viewMode === 'horizontal'
+                            ? 'bg-white text-[#F59E0B] shadow-sm'
+                            : 'text-[#111827] hover:text-[#000000]'
+                            }`}
+                    >
+                        <ArrowLeftRight className="w-4 h-4" />
+                        横向布局
+                    </button>
+                </div>
+            </div>
+
+            <div className="flex-1 min-h-0 grid grid-cols-1 xl:grid-cols-12 gap-6">
+
+                {/* Job List */}
+                <div className="xl:col-span-3 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full">
+                    <div className="p-4 border-b border-slate-100 shrink-0 bg-gradient-to-br from-slate-50 to-white">
+                        <h3 className="font-semibold text-slate-800 flex items-center gap-2">
+                            <span className="w-1 h-4 bg-[#F59E0B] rounded-full"></span>
+                            岗位目录
+                        </h3>
+                    </div>
+                    <div className="flex-1 p-3 overflow-y-auto min-h-0 custom-scrollbar space-y-2">
+                        {jobList.map((job) => (
+                            <button
+                                key={job}
+                                onClick={() => setSelectedJob(job)}
+                                className={`w-full text-left px-4 py-3 rounded-lg text-sm transition-all flex items-center gap-3 border ${selectedJob === job
+                                    ? 'bg-amber-50 border-amber-200 text-amber-700 shadow-sm font-semibold'
+                                    : 'bg-white border-transparent text-slate-600 hover:bg-slate-50 hover:border-slate-200 hover:text-slate-900'
+                                    }`}
+                            >
+                                <div className={`p-1.5 rounded-md ${selectedJob === job ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 text-slate-400'
+                                    }`}>
+                                    <Briefcase className="w-4 h-4" />
+                                </div>
+                                {job}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Job Profile Card */}
+                <div className="xl:col-span-4 min-h-0 flex flex-col">
+                    <JobProfileCard profile={selectedJobData?.profile} />
+                </div>
+
+                {/* Job Knowledge Graph */}
+                <div className="xl:col-span-5 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                    <div className="p-4 border-b border-slate-100 shrink-0 bg-white z-10">
+                        <h3 className="font-semibold text-slate-800 flex items-center gap-2">
+                            <span className="w-1 h-4 bg-[#F59E0B] rounded-full"></span>
+                            职业发展地图
+                        </h3>
+                    </div>
+                    <div className="flex-1 w-full relative">
+                        <JobKnowledgeGraph viewMode={viewMode} graphData={selectedJobData?.graph} />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    );
+}
