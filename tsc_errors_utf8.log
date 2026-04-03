@@ -1,2 +1,0 @@
-﻿.next/types/validator.ts(60,39): error TS2307: Cannot find module '../../app/(dashboard)/plan-generation/page.js' or its corresponding type declarations.
-src/features/matching-center/components/CapabilityInputForm.tsx(5,25): error TS2307: Cannot find module './MBTILanding' or its corresponding type declarations.
