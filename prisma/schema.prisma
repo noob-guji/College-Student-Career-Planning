@@ -17,4 +17,76 @@ model User {
   name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  reports   CareerReport[]
+  chatLogs  ChatLog[]
+}
+
+// 功能5: 生涯蓝图 - 职业生涯发展报告
+model CareerReport {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title     String   @default("职业生涯发展报告")
+  // 目标岗位信息
+  targetRole    String?
+  matchScore    Float?
+
+  // 报告各模块内容 (JSON string)
+  conclusionJson    String? // 职业探索与匹配结论
+  goalsJson         String? // 职业目标设定
+  trendsJson        String? // 行业趋势分析
+  pathwayJson       String? // 发展路径规划
+  actionPlanJson    String? // 行动计划
+  evaluationJson    String? // 评估机制
+
+  // 状态
+  status    String   @default("draft") // draft | complete | exported
+  version   Int      @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 功能7: 知识中枢 - 岗位知识库条目
+model KnowledgeEntry {
+  id          String   @id @default(cuid())
+  category    String   // job_raw | job_structured | job_profile | capability | industry_trend
+  title       String
+  content     String
+  tags        String?  // comma-separated
+  source      String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 功能8: 智脑引擎 - 对话日志
+model ChatLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  sessionId String
+  role      String   // user | assistant
+  content   String
+  model     String?  // 使用的模型标识
+  tokens    Int?     // 消耗的token数
+  latencyMs Int?     // 响应延迟
+
+  createdAt DateTime @default(now())
+}
+
+// 功能8: 智脑引擎 - Prompt模板管理
+model PromptTemplate {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  template    String   // Prompt模板内容
+  variables   String?  // JSON: 模板变量定义
+  category    String   // report | chat | analysis
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
