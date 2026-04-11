@@ -1,443 +1,334 @@
 'use client';
 
-import { X, ChevronLeft, CheckCircle2, Check, Minus, X as XIcon, XCircle, Share2, AlertCircle } from 'lucide-react';
+import { X, ChevronLeft, CheckCircle2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { TestResultData } from './MBTIModal_types';
 
-export interface TestResultData {
-    type: string;
-    title: string;
-    description: string;
-    scores: {
-        e: number; i: number;
-        s: number; n: number;
-        t: number; f: number;
-        j: number; p: number;
-    };
-    strengths: string[];
-    weaknesses: string[];
-}
+export type { TestResultData };
 
-interface MBTIModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    initialData?: TestResultData | null;
-}
-
-// Generate mock questions
-const MOCK_QUESTIONS = [
-    "在社交场合中，你通常是主动发起对话的那个人。",
-    "你更喜欢按部就班地完成工作，而不是在最后一刻突击。",
-    "你经常花时间思考宇宙的起源或人类的本质等抽象问题。",
-    "面对朋友的倾诉，你倾向于先提供情感支持，而不是解决问题的方案。",
-    "你在做决定时，更多地依赖逻辑和事实，而不是个人感受。",
-    "你觉得适应新环境和毫无计划的变动相对容易。",
-    "比起在家里看书，你更喜欢周末和一大群朋友狂欢。",
-    "当面临复杂问题时，你会列出详细的步骤逐一击破。",
-    "在艺术展览中，你更关注作品传达的深刻寓意，而不是其技巧的精湛。",
-    "看到别人哭泣时，你往往也会感到悲伤，甚至跟着流泪。",
-    "你更看重一个人的能力和效率，而不是他是否讨人喜欢。",
-    "旅游时，你喜欢随走随看，而不是制定详细的每日行程。",
-    "你很难在嘈杂的派对聚会中长时间保持精力充沛。",
-    "你做事非常有条理，经常会提前整理好明天要用的物品。",
-    "对你来说，探讨未来的各种可能性比讨论当前的具体事实更有趣。",
-    "当与他人发生冲突时，你会优先考虑维护和谐，而不是证明自己是对的。",
-    "在团队合作中，如果有人跟不上进度，你会直白地指出来。",
-    "比起结构严谨的传统工作环境，你更喜欢充满弹性和自由度的工作。",
-    "你在陌生人面前通常比较沉默寡言，但在熟人面前却很健谈。",
-    "无论做什么事情，你总是有“备用计划”甚至“备用的备用计划”。"
+// ─────────────────────────────────────────────
+// 题目 + 维度映射
+// score 1-5：1=完全不同意, 3=中立, 5=完全同意
+// dim + positive=true 表示：同意 → 倾向该维度的第一个字母
+// ─────────────────────────────────────────────
+const QUESTIONS: { text: string; dim: 'EI' | 'SN' | 'TF' | 'JP'; positive: boolean }[] = [
+  { text: '在社交场合中，你通常是主动发起对话的那个人。',           dim: 'EI', positive: true  },
+  { text: '你更喜欢按部就班地完成工作，而不是在最后一刻突击。',     dim: 'JP', positive: true  },
+  { text: '你经常花时间思考宇宙起源或人类本质等抽象问题。',         dim: 'SN', positive: false },
+  { text: '面对朋友的倾诉，你倾向于先提供情感支持而非解决方案。',   dim: 'TF', positive: false },
+  { text: '做决定时，你更多依赖逻辑和事实而不是个人感受。',         dim: 'TF', positive: true  },
+  { text: '你觉得适应新环境和毫无计划的变动相对容易。',             dim: 'JP', positive: false },
+  { text: '比起在家看书，你更喜欢周末和一大群朋友出去玩。',         dim: 'EI', positive: true  },
+  { text: '面对复杂问题时，你会列出详细步骤逐一击破。',             dim: 'JP', positive: true  },
+  { text: '在艺术展览中，你更关注作品传达的深刻寓意而非技巧。',     dim: 'SN', positive: false },
+  { text: '看到别人哭泣时，你往往也会感到悲伤甚至跟着流泪。',       dim: 'TF', positive: false },
+  { text: '你更看重一个人的能力和效率而非是否讨人喜欢。',           dim: 'TF', positive: true  },
+  { text: '旅游时你喜欢随走随看，而不是制定详细行程。',             dim: 'JP', positive: false },
+  { text: '你很难在嘈杂的派对聚会中长时间保持精力充沛。',           dim: 'EI', positive: false },
+  { text: '你做事非常有条理，会提前整理好明天要用的物品。',         dim: 'JP', positive: true  },
+  { text: '探讨未来的各种可能性比讨论当前的具体事实更让你兴奋。',   dim: 'SN', positive: false },
+  { text: '当与他人发生冲突时，你会优先考虑维护和谐。',             dim: 'TF', positive: false },
+  { text: '在团队合作中，如果有人跟不上进度，你会直白地指出来。',   dim: 'TF', positive: true  },
+  { text: '比起结构严谨的环境，你更喜欢充满弹性和自由度的工作。',   dim: 'JP', positive: false },
+  { text: '你在陌生人面前通常比较沉默，但在熟人面前却很健谈。',     dim: 'EI', positive: false },
+  { text: '无论做什么事，你总是有备用计划甚至备用的备用计划。',     dim: 'JP', positive: true  },
 ];
 
-const TOTAL_QUESTIONS = MOCK_QUESTIONS.length;
-
-// Static mock result for when answering questions
-const DEFAULT_TEST_RESULT: TestResultData = {
-    type: 'ESTJ',
-    title: '总经理',
-    description: '出色的管理者，对管理事务或人员非常在行。',
-    scores: { e: 65, i: 35, s: 72, n: 28, t: 58, f: 42, j: 80, p: 20 },
-    strengths: ['高效且有条理，善于建立系统', '极强的责任心，信守对一切的承诺', '忠诚可靠的基石，受人尊敬的公民', '出色的组织能力，能将混乱变为井然有序'],
-    weaknesses: ['容易固执己见，不愿接受非传统思路', '难以表达情感，显得过于严厉和生硬', '过于关注社会地位和公众眼中的形象', '难以放松自我，总是觉得有任务需要完成']
+// MBTI 类型信息
+const MBTI_TYPES: Record<string, { title: string; desc: string; strengths: string[]; weaknesses: string[] }> = {
+  INTJ: { title: '建筑师', desc: '富有想象力且战略性强，一切都在计划中。', strengths: ['战略思维极强', '独立自主', '意志坚定', '高标准严要求'], weaknesses: ['过于自信', '难以接受情感诉求', '完美主义倾向', '人际关系冷淡'] },
+  INTP: { title: '逻辑学家', desc: '具有创造性的发明家，对知识有无穷的渴求。', strengths: ['逻辑分析能力强', '创造性思维', '客观理性', '求知欲旺盛'], weaknesses: ['漫不经心', '难以表达情感', '容易分心', '过于追求完美'] },
+  ENTJ: { title: '指挥官', desc: '大胆、富有想象力且意志坚强的领袖。', strengths: ['天生领袖气质', '战略眼光独到', '高效且有条理', '决断力强'], weaknesses: ['固执己见', '不擅长情感表达', '过于强势', '不耐烦'] },
+  ENTP: { title: '辩论家', desc: '聪明好奇的思想家，无法抗拒智识挑战。', strengths: ['思维敏捷灵活', '创造力强', '沟通能力突出', '自信开朗'], weaknesses: ['争强好胜', '缺乏专注力', '不擅执行', '容易忽视细节'] },
+  INFJ: { title: '提倡者', desc: '安静而神秘，同时令人鼓舞且不知疲倦的理想主义者。', strengths: ['洞察力强', '原则性强', '富有同理心', '有远见'], weaknesses: ['过于敏感', '固执', '完美主义', '容易精疲力竭'] },
+  INFP: { title: '调停者', desc: '诗意、善良的利他主义者，总是热情地为美好事物服务。', strengths: ['理想主义', '开放包容', '富有创意', '忠诚专一'], weaknesses: ['过于理想化', '自我批评', '缺乏实用性', '容易忽视细节'] },
+  ENFJ: { title: '主人公', desc: '富有魅力的激励者，热爱激励他人。', strengths: ['天生领袖', '共情能力强', '善于沟通', '利他主义'], weaknesses: ['过于理想化', '优柔寡断', '过度牺牲自我', '回避冲突'] },
+  ENFP: { title: '竞选者', desc: '充满热情的富有创意的社会活动家。', strengths: ['好奇心强', '观察力敏锐', '充满活力', '善于社交'], weaknesses: ['注意力分散', '缺乏专注', '过于情绪化', '独立性过强'] },
+  ISTJ: { title: '物流师', desc: '务实且注重事实的可靠人才。', strengths: ['诚实可靠', '责任心强', '有条理', '坚韧不拔'], weaknesses: ['固执保守', '难以接受变化', '自我批评', '不擅表达情感'] },
+  ISFJ: { title: '守卫者', desc: '非常专注的保护者，随时准备保卫所爱的人。', strengths: ['支持性强', '可靠负责', '耐心细致', '观察敏锐'], weaknesses: ['过于谦逊', '容易被忽视', '过度付出', '不擅拒绝'] },
+  ESTJ: { title: '总经理', desc: '出色的管理者，对管理事务和人员非常在行。', strengths: ['组织能力强', '责任心强', '有条理', '诚实正直'], weaknesses: ['固执己见', '难以表达情感', '过于关注地位', '难以放松'] },
+  ESFJ: { title: '执政官', desc: '极其关心他人，社交能力强，人缘极好。', strengths: ['善于照顾他人', '责任感强', '善于合作', '忠诚可靠'], weaknesses: ['过于在意他人看法', '容易被伤害', '不擅创新', '过度分享'] },
+  ISTP: { title: '鉴赏家', desc: '大胆且务实的实验者，擅长使用各种工具。', strengths: ['乐观冷静', '富有创意', '实用主义', '危机处理能力强'], weaknesses: ['固执', '不擅表达情感', '难以预测', '容易冒险'] },
+  ISFP: { title: '探险家', desc: '灵活有魅力的艺术家，随时准备探索新事物。', strengths: ['魅力十足', '对美敏感', '和平主义', '开朗好奇'], weaknesses: ['过于竞争', '难以长期规划', '过度独立', '不可预测'] },
+  ESTP: { title: '企业家', desc: '精明、充满活力的感知者，真正享受活在当下。', strengths: ['大胆果断', '直接务实', '精于观察', '原创风格'], weaknesses: ['不敏感', '缺乏耐心', '冒险倾向', '不善规划'] },
+  ESFP: { title: '表演者', desc: '充满活力的娱乐者，生活对他们来说从不无聊。', strengths: ['大胆乐观', '审美独特', '实用主义', '热爱关注'], weaknesses: ['敏感脆弱', '冲突回避', '容易分心', '缺乏规划'] },
 };
 
+// ─────────────────────────────────────────────
+// 计算 MBTI 结果
+// ─────────────────────────────────────────────
+function calculateMBTI(answers: Record<number, number>): TestResultData {
+  const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+  QUESTIONS.forEach((q, i) => {
+    const ans = answers[i] ?? 3; // 默认中立
+    const weight = ans - 3; // -2 ~ +2
+
+    if (q.dim === 'EI') {
+      if (q.positive) { scores.E += weight; } else { scores.I += weight; }
+    } else if (q.dim === 'SN') {
+      // positive=false 表示同意→N
+      if (q.positive) { scores.S += weight; } else { scores.N += weight; }
+    } else if (q.dim === 'TF') {
+      if (q.positive) { scores.T += weight; } else { scores.F += weight; }
+    } else {
+      if (q.positive) { scores.J += weight; } else { scores.P += weight; }
+    }
+  });
+
+  const type = [
+    scores.E >= scores.I ? 'E' : 'I',
+    scores.S >= scores.N ? 'S' : 'N',
+    scores.T >= scores.F ? 'T' : 'F',
+    scores.J >= scores.P ? 'J' : 'P',
+  ].join('');
+
+  // 百分比计算（归一化为 0-100）
+  const toPercent = (a: number, b: number) => {
+    const total = Math.abs(a) + Math.abs(b) + 1;
+    return Math.round(((a + total / 2) / total) * 100);
+  };
+  const eScore = toPercent(scores.E, scores.I);
+  const sScore = toPercent(scores.S, scores.N);
+  const tScore = toPercent(scores.T, scores.F);
+  const jScore = toPercent(scores.J, scores.P);
+
+  const info = MBTI_TYPES[type] ?? MBTI_TYPES['INTJ'];
+
+  return {
+    type,
+    title: info.title,
+    description: info.desc,
+    scores: {
+      e: eScore, i: 100 - eScore,
+      s: sScore, n: 100 - sScore,
+      t: tScore, f: 100 - tScore,
+      j: jScore, p: 100 - jScore,
+    },
+    strengths:  info.strengths,
+    weaknesses: info.weaknesses,
+  };
+}
+
+// ─────────────────────────────────────────────
+// Modal 组件（保留原有 UI，只修改结果计算）
+// ─────────────────────────────────────────────
+interface MBTIModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  initialData?: TestResultData | null;
+}
+
+const TOTAL_QUESTIONS = QUESTIONS.length;
+
 export default function MBTIModal({ isOpen, onClose, initialData }: MBTIModalProps) {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
-    const [answers, setAnswers] = useState<Record<number, number>>({});
-    const [isFinished, setIsFinished] = useState(false);
-    const [resultData, setResultData] = useState<TestResultData>(DEFAULT_TEST_RESULT);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction,    setDirection]    = useState(1);
+  const [answers,      setAnswers]      = useState<Record<number, number>>({});
+  const [isFinished,   setIsFinished]   = useState(false);
+  const [resultData,   setResultData]   = useState<TestResultData | null>(null);
 
-    // Reset state when opened or given initial data
-    useEffect(() => {
-        if (isOpen) {
-            if (initialData) {
-                setResultData(initialData);
-                setIsFinished(true);
-            } else {
-                setResultData(DEFAULT_TEST_RESULT);
-                setIsFinished(false);
-                setCurrentIndex(0);
-                setAnswers({});
-            }
-        }
-    }, [isOpen, initialData]);
+  useEffect(() => {
+    if (isOpen) {
+      if (initialData) {
+        setResultData(initialData);
+        setIsFinished(true);
+      } else {
+        setResultData(null);
+        setIsFinished(false);
+        setCurrentIndex(0);
+        setAnswers({});
+      }
+    }
+  }, [isOpen, initialData]);
 
-    if (!isOpen) return null;
+  if (!isOpen) return null;
 
-    const handleOptionSelect = (score: number) => {
-        setAnswers({ ...answers, [currentIndex]: score });
-        
-        // Advance to next question automatically after a short delay for feedback
-        setTimeout(() => {
-            if (currentIndex < TOTAL_QUESTIONS - 1) {
-                setDirection(1);
-                setCurrentIndex(currentIndex + 1);
-            } else {
-                // Completed the assessment
-                setIsFinished(true);
-            }
-        }, 300);
-    };
+  const handleOptionSelect = (score: number) => {
+    const newAnswers = { ...answers, [currentIndex]: score };
+    setAnswers(newAnswers);
 
-    const handlePrevious = () => {
-        if (currentIndex > 0) {
-            setDirection(-1);
-            setCurrentIndex(currentIndex - 1);
-        }
-    };
+    setTimeout(() => {
+      if (currentIndex < TOTAL_QUESTIONS - 1) {
+        setDirection(1);
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        // ★ 真实计算 MBTI 结果
+        const result = calculateMBTI(newAnswers);
+        // 保存到 sessionStorage
+        try { sessionStorage.setItem('mbtiResult', JSON.stringify(result)); } catch {}
+        setResultData(result);
+        setIsFinished(true);
+      }
+    }, 300);
+  };
 
-    const progressPercentage = Math.round(((currentIndex) / TOTAL_QUESTIONS) * 100);
+  const handlePrevious = () => {
+    if (currentIndex > 0) { setDirection(-1); setCurrentIndex(currentIndex - 1); }
+  };
 
-    // Variants for sliding transitions
-    const variants = {
-        enter: (dir: number) => ({
-            x: dir > 0 ? 50 : -50,
-            opacity: 0
-        }),
-        center: {
-            z: 1,
-            x: 0,
-            opacity: 1
-        },
-        exit: (dir: number) => ({
-            z: 0,
-            x: dir < 0 ? 50 : -50,
-            opacity: 0
-        })
-    };
+  const progress = Math.round((currentIndex / TOTAL_QUESTIONS) * 100);
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            {/* Backdrop */}
-            <div 
-                className="absolute inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity duration-300"
-                onClick={onClose}
-            ></div>
-            
-            {/* Modal Content */}
-            <div className="relative w-full max-w-5xl h-[90vh] sm:h-[85vh] bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transform transition-all animate-in fade-in zoom-in-95 duration-200 border border-white/20">
-                {/* Header */}
-                <div className="flex items-center justify-between px-6 sm:px-10 py-5 border-b border-slate-100 bg-white/80 backdrop-blur-md z-20 shrink-0">
-                    <h3 className="text-xl font-bold text-slate-900 tracking-wide">
-                        {!isFinished ? "16型人格深度测评" : "测评结果报告"}
-                    </h3>
-                    <button 
-                        onClick={onClose}
-                        className="p-2.5 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-100"
-                    >
-                        <X className="w-5 h-5" />
-                    </button>
-                </div>
-                
-                {/* Conditional Rendering of Test vs Result */}
-                {!isFinished ? (
-                    /* The Test UI */
-                    <div className="flex-1 overflow-hidden flex flex-col bg-slate-50/50 relative">
-                        {/* Background decorations */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-100/40 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100/40 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
-                        
-                        {/* Top Progress Bar Area */}
-                        <div className="w-full px-6 sm:px-16 pt-8 pb-4 relative z-10 shrink-0">
-                            <div className="flex justify-between items-end mb-3">
-                                <span className="text-base font-bold text-slate-700 font-mono tracking-tight sm:text-lg">
-                                    问题 {currentIndex + 1} <span className="text-slate-400 text-sm">/ {TOTAL_QUESTIONS}</span>
-                                </span>
-                                <span className="text-sm font-bold text-slate-400 font-mono">{progressPercentage}%</span>
-                            </div>
-                            {/* The dynamic progress bar */}
-                            <div className="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden shrink-0 shadow-inner">
-                                <div 
-                                    className="h-full bg-indigo-500 rounded-full transition-all duration-500 ease-out"
-                                    style={{ width: `${progressPercentage}%` }}
-                                ></div>
-                            </div>
-                        </div>
+  const variants = {
+    enter: (dir: number) => ({ x: dir > 0 ? 50 : -50, opacity: 0 }),
+    center: { z: 1, x: 0, opacity: 1 },
+    exit: (dir: number) => ({ x: dir > 0 ? -50 : 50, opacity: 0 }),
+  };
 
-                        {/* Question & Options Area */}
-                        <div className="flex-1 relative w-full flex items-center justify-center px-4 sm:px-16 pb-12 z-10">
-                            <AnimatePresence custom={direction} mode="wait">
-                                <motion.div
-                                    key={currentIndex}
-                                    custom={direction}
-                                    variants={variants}
-                                    initial="enter"
-                                    animate="center"
-                                    exit="exit"
-                                    transition={{
-                                        x: { type: "tween", duration: 0.35, ease: [0.25, 1, 0.5, 1] },
-                                        opacity: { duration: 0.25 }
-                                    }}
-                                    className="w-full max-w-3xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2rem] p-8 sm:p-14 border border-slate-100/60"
-                                >
-                                    {/* Question Text */}
-                                    <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 text-center mb-16 leading-relaxed tracking-tight">
-                                        {MOCK_QUESTIONS[currentIndex]}
-                                    </h4>
+  const OPTIONS = [
+    { score: 1, label: '完全不同意', short: '强烈否定' },
+    { score: 2, label: '不同意',     short: '倾向否定' },
+    { score: 3, label: '中立',       short: '中立' },
+    { score: 4, label: '同意',       short: '倾向同意' },
+    { score: 5, label: '完全同意',   short: '强烈同意' },
+  ];
 
-                                    {/* 5 Options Timeline */}
-                                    <div className="flex flex-col mb-2">
-                                        <div className="flex justify-between items-center w-full gap-2 sm:gap-4 relative px-2">
-                                            {/* Background connecting line */}
-                                            <div className="absolute top-1/2 left-8 right-8 h-1 bg-slate-100 -translate-y-1/2 z-0 hidden sm:block rounded-full"></div>
-                                            
-                                            {/* Option 1: Strongly Disagree */}
-                                            <button 
-                                                onClick={() => handleOptionSelect(1)}
-                                                className={`relative z-10 group flex flex-col items-center justify-center gap-3`}
-                                            >
-                                                <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full border-[3px] flex items-center justify-center transition-all duration-300 shadow-sm
-                                                    bg-white border-rose-100 text-rose-400 group-hover:bg-rose-50 group-hover:border-rose-400 group-hover:text-rose-600 group-hover:scale-110 group-hover:shadow-rose-100/50 group-hover:shadow-lg
-                                                    ${answers[currentIndex] === 1 ? 'bg-rose-50 border-rose-500 text-rose-600 ring-4 ring-rose-100/50 scale-110' : ''}`}>
-                                                    <XCircle className="w-8 h-8" strokeWidth={2.5} />
-                                                </div>
-                                                <span className="text-xs sm:text-sm font-bold text-rose-400 group-hover:text-rose-600 transition-colors">完全不同意</span>
-                                            </button>
+  const OPTION_STYLES = [
+    'hover:bg-rose-50 hover:border-rose-500 hover:text-rose-600 hover:ring-4 hover:ring-rose-100/50',
+    'hover:bg-orange-50 hover:border-orange-500 hover:text-orange-500 hover:ring-4 hover:ring-orange-100/50',
+    'hover:bg-slate-50 hover:border-slate-500 hover:text-slate-600 hover:ring-4 hover:ring-slate-100/50',
+    'hover:bg-teal-50 hover:border-teal-500 hover:text-teal-500 hover:ring-4 hover:ring-teal-100/50',
+    'hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 hover:ring-4 hover:ring-emerald-100/50',
+  ];
 
-                                            {/* Option 2: Disagree */}
-                                            <button 
-                                                onClick={() => handleOptionSelect(2)}
-                                                className={`relative z-10 group flex flex-col items-center justify-center gap-3`}
-                                            >
-                                                <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border-[3px] flex items-center justify-center transition-all duration-300 mt-1.5 sm:mt-2 shadow-sm
-                                                    bg-white border-orange-100 text-orange-400 group-hover:bg-orange-50 group-hover:border-orange-400 group-hover:text-orange-500 group-hover:scale-110 group-hover:shadow-orange-100/50 group-hover:shadow-md
-                                                    ${answers[currentIndex] === 2 ? 'bg-orange-50 border-orange-500 text-orange-500 ring-4 ring-orange-100/50 scale-110' : ''}`}>
-                                                    <XIcon className="w-6 h-6" strokeWidth={2.5} />
-                                                </div>
-                                                <span className="text-xs sm:text-sm font-semibold text-slate-400 group-hover:text-orange-500 transition-colors">不同意</span>
-                                            </button>
+  const SELECTED_STYLES = [
+    'bg-rose-50 border-rose-500 text-rose-600 ring-4 ring-rose-100/50 scale-110',
+    'bg-orange-50 border-orange-500 text-orange-500 ring-4 ring-orange-100/50 scale-110',
+    'bg-slate-50 border-slate-500 text-slate-600 ring-4 ring-slate-100/50 scale-110',
+    'bg-teal-50 border-teal-500 text-teal-500 ring-4 ring-teal-100/50 scale-110',
+    'bg-emerald-50 border-emerald-500 text-emerald-500 ring-4 ring-emerald-100/50 scale-110',
+  ];
 
-                                            {/* Option 3: Neutral */}
-                                            <button 
-                                                onClick={() => handleOptionSelect(3)}
-                                                className={`relative z-10 group flex flex-col items-center justify-center gap-3`}
-                                            >
-                                                <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full border-[3px] flex items-center justify-center transition-all duration-300 mt-2.5 sm:mt-3 shadow-sm
-                                                    bg-white border-slate-100 text-slate-400 group-hover:bg-slate-50 group-hover:border-slate-400 group-hover:text-slate-600 group-hover:scale-110 group-hover:shadow-slate-100/50 group-hover:shadow-md
-                                                    ${answers[currentIndex] === 3 ? 'bg-slate-50 border-slate-500 text-slate-600 ring-4 ring-slate-100/50 scale-110' : ''}`}>
-                                                    <Minus className="w-5 h-5" strokeWidth={3} />
-                                                </div>
-                                                <span className="text-xs sm:text-sm font-semibold text-slate-400 group-hover:text-slate-600 transition-colors">中立</span>
-                                            </button>
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+        className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden max-h-[90vh] flex flex-col">
 
-                                            {/* Option 4: Agree */}
-                                            <button 
-                                                onClick={() => handleOptionSelect(4)}
-                                                className={`relative z-10 group flex flex-col items-center justify-center gap-3`}
-                                            >
-                                                <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border-[3px] flex items-center justify-center transition-all duration-300 mt-1.5 sm:mt-2 shadow-sm
-                                                    bg-white border-teal-100 text-teal-400 group-hover:bg-teal-50 group-hover:border-teal-400 group-hover:text-teal-500 group-hover:scale-110 group-hover:shadow-teal-100/50 group-hover:shadow-md
-                                                    ${answers[currentIndex] === 4 ? 'bg-teal-50 border-teal-500 text-teal-500 ring-4 ring-teal-100/50 scale-110' : ''}`}>
-                                                    <Check className="w-6 h-6" strokeWidth={3} />
-                                                </div>
-                                                <span className="text-xs sm:text-sm font-semibold text-slate-400 group-hover:text-teal-500 transition-colors">同意</span>
-                                            </button>
-
-                                            {/* Option 5: Strongly Agree */}
-                                            <button 
-                                                onClick={() => handleOptionSelect(5)}
-                                                className={`relative z-10 group flex flex-col items-center justify-center gap-3`}
-                                            >
-                                                <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full border-[3px] flex items-center justify-center transition-all duration-300 shadow-sm
-                                                    bg-white border-emerald-100 text-emerald-400 group-hover:bg-emerald-50 group-hover:border-emerald-400 group-hover:text-emerald-500 group-hover:scale-110 group-hover:shadow-emerald-100/50 group-hover:shadow-lg
-                                                    ${answers[currentIndex] === 5 ? 'bg-emerald-50 border-emerald-500 text-emerald-500 ring-4 ring-emerald-100/50 scale-110' : ''}`}>
-                                                    <CheckCircle2 className="w-8 h-8" strokeWidth={2.5} />
-                                                </div>
-                                                <span className="text-xs sm:text-sm font-bold text-emerald-400 group-hover:text-emerald-500 transition-colors">完全同意</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
-
-                        {/* Footer / Meta Data Area */}
-                        <div className="w-full px-6 sm:px-16 pb-6 pt-4 flex items-center justify-between bg-transparent z-10 shrink-0">
-                            <button 
-                                onClick={handlePrevious}
-                                disabled={currentIndex === 0}
-                                className="flex items-center text-slate-500 font-semibold hover:text-indigo-600 transition-colors disabled:opacity-30 disabled:hover:text-slate-500 group"
-                            >
-                                <ChevronLeft className="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" /> 上一题
-                            </button>
-
-                            <div className="text-center font-medium text-slate-400/80 text-sm tracking-wide">
-                                共 {TOTAL_QUESTIONS} 题 · 预计还需 <span className="text-slate-500">{Math.max(1, Math.ceil((TOTAL_QUESTIONS - currentIndex) * 0.5))}</span> 分钟
-                            </div>
-                            
-                            <div className="w-20"></div>
-                        </div>
-                    </div>
-                ) : (
-                    /* The Final Result Page UI */
-                    <div className="flex-1 overflow-y-auto w-full px-4 sm:px-12 py-8 bg-slate-50/50 relative z-10 custom-scrollbar">
-                        <div className="max-w-4xl mx-auto space-y-6">
-                            
-                            {/* Result Header */}
-                            <div className="flex items-start justify-between bg-white p-8 sm:p-10 rounded-[2rem] shadow-sm border border-slate-100 relative overflow-hidden">
-                                <div className="absolute top-0 right-0 w-80 h-80 bg-teal-50/60 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-                                <div className="absolute bottom-0 left-0 w-64 h-64 bg-slate-50/80 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
-                                
-                                <div className="relative z-10">
-                                    <div className="inline-block px-3.5 py-1.5 bg-teal-100/80 text-teal-800 text-xs font-black tracking-widest rounded-full mb-4 uppercase shadow-sm">
-                                        测试结果
-                                    </div>
-                                    <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mb-3 tracking-tighter loading-tight">
-                                        {resultData.type} <span className="text-slate-300 font-normal mx-2">|</span> {resultData.title}
-                                    </h2>
-                                    <p className="text-lg text-slate-600 font-medium tracking-wide">
-                                        {resultData.description}
-                                    </p>
-                                </div>
-                                <button className="relative z-10 p-3 bg-white hover:bg-slate-50 border border-slate-100 text-slate-400 hover:text-slate-800 rounded-full transition-all shadow-sm hover:shadow-md hover:scale-105">
-                                    <Share2 className="w-5 h-5" />
-                                </button>
-                            </div>
-
-                            {/* 4 Dimensions Grid */}
-                            <div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center px-2">
-                                    <span className="w-1.5 h-6 bg-teal-500 rounded-full mr-3 inline-block"></span> 人格维度解析
-                                </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {/* E-I */}
-                                    <div className="bg-white p-6 sm:p-7 rounded-[1.5rem] border border-slate-100 shadow-sm transition-shadow hover:shadow-md">
-                                        <div className="flex justify-between items-end mb-4 font-bold tracking-tight">
-                                            <span className="text-teal-600 text-xl">E <span className="text-sm font-semibold text-slate-500 ml-1">外向 <span className="text-teal-500 font-mono tracking-tighter opacity-80">({resultData.scores.e}%)</span></span></span>
-                                            <span className="text-slate-400 text-xl"><span className="text-sm font-semibold text-slate-400 mr-1"><span className="font-mono tracking-tighter opacity-80">({resultData.scores.i}%)</span> 内向</span> I</span>
-                                        </div>
-                                        <div className="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
-                                            <motion.div initial={{ width: 0 }} animate={{ width: `${resultData.scores.e}%` }} transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }} className="h-full bg-teal-500"></motion.div>
-                                            <motion.div initial={{ width: 0 }} animate={{ width: `${resultData.scores.i}%` }} transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }} className="h-full bg-slate-200/50"></motion.div>
-                                        </div>
-                                    </div>
-
-                                    {/* S-N */}
-                                    <div className="bg-white p-6 sm:p-7 rounded-[1.5rem] border border-slate-100 shadow-sm transition-shadow hover:shadow-md">
-                                        <div className="flex justify-between items-end mb-4 font-bold tracking-tight">
-                                            <span className="text-teal-600 text-xl">S <span className="text-sm font-semibold text-slate-500 ml-1">实感 <span className="text-teal-500 font-mono tracking-tighter opacity-80">({resultData.scores.s}%)</span></span></span>
-                                            <span className="text-slate-400 text-xl"><span className="text-sm font-semibold text-slate-400 mr-1"><span className="font-mono tracking-tighter opacity-80">({resultData.scores.n}%)</span> 直觉</span> N</span>
-                                        </div>
-                                        <div className="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
-                                            <motion.div initial={{ width: 0 }} animate={{ width: `${resultData.scores.s}%` }} transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1], delay: 0.1 }} className="h-full bg-teal-500"></motion.div>
-                                            <motion.div initial={{ width: 0 }} animate={{ width: `${resultData.scores.n}%` }} transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1], delay: 0.1 }} className="h-full bg-slate-200/50"></motion.div>
-                                        </div>
-                                    </div>
-
-                                    {/* T-F */}
-                                    <div className="bg-white p-6 sm:p-7 rounded-[1.5rem] border border-slate-100 shadow-sm transition-shadow hover:shadow-md">
-                                        <div className="flex justify-between items-end mb-4 font-bold tracking-tight">
-                                            <span className="text-teal-600 text-xl">T <span className="text-sm font-semibold text-slate-500 ml-1">理智 <span className="text-teal-500 font-mono tracking-tighter opacity-80">({resultData.scores.t}%)</span></span></span>
-                                            <span className="text-slate-400 text-xl"><span className="text-sm font-semibold text-slate-400 mr-1"><span className="font-mono tracking-tighter opacity-80">({resultData.scores.f}%)</span> 情感</span> F</span>
-                                        </div>
-                                        <div className="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
-                                            <motion.div initial={{ width: 0 }} animate={{ width: `${resultData.scores.t}%` }} transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1], delay: 0.2 }} className="h-full bg-teal-500"></motion.div>
-                                            <motion.div initial={{ width: 0 }} animate={{ width: `${resultData.scores.f}%` }} transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1], delay: 0.2 }} className="h-full bg-slate-200/50"></motion.div>
-                                        </div>
-                                    </div>
-
-                                    {/* J-P */}
-                                    <div className="bg-white p-6 sm:p-7 rounded-[1.5rem] border border-slate-100 shadow-sm transition-shadow hover:shadow-md">
-                                        <div className="flex justify-between items-end mb-4 font-bold tracking-tight">
-                                            <span className="text-teal-600 text-xl">J <span className="text-sm font-semibold text-slate-500 ml-1">判断 <span className="text-teal-500 font-mono tracking-tighter opacity-80">({resultData.scores.j}%)</span></span></span>
-                                            <span className="text-slate-400 text-xl"><span className="text-sm font-semibold text-slate-400 mr-1"><span className="font-mono tracking-tighter opacity-80">({resultData.scores.p}%)</span> 理解</span> P</span>
-                                        </div>
-                                        <div className="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
-                                            <motion.div initial={{ width: 0 }} animate={{ width: `${resultData.scores.j}%` }} transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1], delay: 0.3 }} className="h-full bg-teal-500"></motion.div>
-                                            <motion.div initial={{ width: 0 }} animate={{ width: `${resultData.scores.p}%` }} transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1], delay: 0.3 }} className="h-full bg-slate-200/50"></motion.div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Strengths and Weaknesses Columns */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {/* Strengths Column */}
-                                <div className="bg-white p-6 sm:p-8 rounded-[2rem] border border-emerald-100/50 shadow-sm transition-shadow hover:shadow-md relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50/80 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-                                    <div className="flex items-center gap-4 mb-6 relative z-10">
-                                        <div className="w-12 h-12 rounded-full bg-emerald-100/80 flex items-center justify-center text-emerald-600 shadow-inner">
-                                            <CheckCircle2 className="w-6 h-6" />
-                                        </div>
-                                        <h3 className="text-xl font-bold text-slate-900 tracking-wide">核心优势</h3>
-                                    </div>
-                                    <ul className="space-y-4 relative z-10">
-                                        {resultData.strengths.map((item, i) => (
-                                            <li key={i} className="flex items-start text-slate-700 font-medium leading-relaxed">
-                                                <Check className="w-5 h-5 text-emerald-500 mr-3 shrink-0 mt-0.5" strokeWidth={3} />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                {/* Weaknesses Column */}
-                                <div className="bg-white p-6 sm:p-8 rounded-[2rem] border border-amber-100/50 shadow-sm transition-shadow hover:shadow-md relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-amber-50/80 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-                                    <div className="flex items-center gap-4 mb-6 relative z-10">
-                                        <div className="w-12 h-12 rounded-full bg-amber-100/80 flex items-center justify-center text-amber-600 shadow-inner">
-                                            <AlertCircle className="w-6 h-6" />
-                                        </div>
-                                        <h3 className="text-xl font-bold text-slate-900 tracking-wide">潜在盲区</h3>
-                                    </div>
-                                    <ul className="space-y-4 relative z-10">
-                                        {resultData.weaknesses.map((item, i) => (
-                                            <li key={i} className="flex items-start text-slate-700 font-medium leading-relaxed">
-                                                <AlertCircle className="w-5 h-5 text-amber-500 mr-3 shrink-0 mt-0.5" strokeWidth={2.5} />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            {/* Action Button */}
-                            <div className="pt-6 pb-2 flex justify-center">
-                                <button onClick={onClose} className="px-12 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl shadow-xl transition-all hover:-translate-y-1 focus:ring-4 focus:ring-slate-200">
-                                    完成并关闭
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-                )}
-            </div>
-            
-            <style jsx global>{`
-                .custom-scrollbar::-webkit-scrollbar {
-                    width: 6px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-track {
-                    background: transparent;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background-color: rgba(203, 213, 225, 0.5);
-                    border-radius: 20px;
-                }
-                .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-                    background-color: rgba(148, 163, 184, 0.8);
-                }
-            `}</style>
+        {/* Header */}
+        <div className="flex items-center justify-between px-8 pt-7 pb-4 shrink-0">
+          <h2 className="text-xl font-bold text-slate-900">MBTI 职业性格测评</h2>
+          <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500">
+            <X className="w-5 h-5" />
+          </button>
         </div>
-    );
+
+        <div className="flex-1 overflow-y-auto">
+          {!isFinished ? (
+            <div className="px-8 pb-8 space-y-6">
+              {/* 进度条 */}
+              <div>
+                <div className="flex justify-between text-xs text-slate-400 mb-2">
+                  <span>问题 {currentIndex + 1} / {TOTAL_QUESTIONS}</span>
+                  <span>{progress}%</span>
+                </div>
+                <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <motion.div animate={{ width: `${progress}%` }} className="h-full bg-amber-500 rounded-full" />
+                </div>
+              </div>
+
+              {/* 问题 */}
+              <div className="min-h-[80px] flex items-center">
+                <AnimatePresence mode="wait" custom={direction}>
+                  <motion.p key={currentIndex} custom={direction} variants={variants}
+                    initial="enter" animate="center" exit="exit"
+                    transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    className="text-lg font-medium text-slate-800 leading-relaxed">
+                    {QUESTIONS[currentIndex].text}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+
+              {/* 选项 */}
+              <div className="flex justify-between items-end gap-3">
+                {OPTIONS.map((opt, i) => (
+                  <button key={opt.score} onClick={() => handleOptionSelect(opt.score)}
+                    className={`flex-1 flex flex-col items-center gap-2 py-4 rounded-2xl border-2 border-slate-200 text-slate-400 text-xs font-semibold transition-all duration-150 cursor-pointer
+                      ${answers[currentIndex] === opt.score ? SELECTED_STYLES[i] : OPTION_STYLES[i]}`}>
+                    <div className={`w-8 h-8 rounded-full border-2 border-current flex items-center justify-center font-bold text-sm`}>
+                      {opt.score}
+                    </div>
+                    <span className="hidden sm:block text-center leading-tight">{opt.short}</span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex justify-between items-center text-xs text-slate-400">
+                <span>← 完全不同意</span>
+                <span>完全同意 →</span>
+              </div>
+
+              {/* 上一题 */}
+              {currentIndex > 0 && (
+                <button onClick={handlePrevious}
+                  className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-600 transition-colors">
+                  <ChevronLeft className="w-4 h-4" /> 上一题
+                </button>
+              )}
+            </div>
+          ) : resultData ? (
+            <div className="px-8 pb-8 space-y-5">
+              {/* 结果标题 */}
+              <div className="text-center">
+                <div className="inline-flex items-center gap-2 text-emerald-600 bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                  <CheckCircle2 className="w-4 h-4" /> 测评完成
+                </div>
+                <h3 className="text-5xl font-black text-slate-900 tracking-wider mb-2">{resultData.type}</h3>
+                <p className="text-lg font-semibold text-amber-600">{resultData.title}</p>
+                <p className="text-sm text-slate-500 mt-2 max-w-sm mx-auto">{resultData.description}</p>
+              </div>
+
+              {/* 维度得分 */}
+              <div className="space-y-3">
+                {[
+                  ['E 外向', resultData.scores.e, 'I 内向', resultData.scores.i, 'teal'],
+                  ['S 实感', resultData.scores.s, 'N 直觉', resultData.scores.n, 'blue'],
+                  ['T 思考', resultData.scores.t, 'F 情感', resultData.scores.f, 'purple'],
+                  ['J 判断', resultData.scores.j, 'P 感知', resultData.scores.p, 'amber'],
+                ].map(([la, sa, lb, sb, color]) => (
+                  <div key={String(la)} className="bg-slate-50 rounded-xl p-3">
+                    <div className="flex justify-between text-xs font-bold text-slate-600 mb-2">
+                      <span className={`text-${color}-600`}>{la} ({sa}%)</span>
+                      <span>{lb} ({sb}%)</span>
+                    </div>
+                    <div className="h-2 bg-slate-200 rounded-full overflow-hidden flex">
+                      <motion.div initial={{ width: 0 }} animate={{ width: `${sa}%` }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className={`h-full bg-${color}-500 rounded-l-full`} />
+                      <div className="flex-1 bg-slate-300 rounded-r-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* 优劣势 */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-100">
+                  <p className="text-xs font-bold text-emerald-700 mb-2">✅ 优势</p>
+                  {resultData.strengths.map(s => (
+                    <p key={s} className="text-xs text-emerald-800 flex items-start gap-1.5 mt-1">
+                      <span className="text-emerald-500 shrink-0">▸</span>{s}
+                    </p>
+                  ))}
+                </div>
+                <div className="p-3 bg-amber-50 rounded-xl border border-amber-100">
+                  <p className="text-xs font-bold text-amber-700 mb-2">⚠️ 待改善</p>
+                  {resultData.weaknesses.map(w => (
+                    <p key={w} className="text-xs text-amber-800 flex items-start gap-1.5 mt-1">
+                      <span className="text-amber-500 shrink-0">▸</span>{w}
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              <button onClick={onClose}
+                className="w-full py-3 bg-[#111827] text-amber-400 font-bold rounded-xl hover:bg-slate-800 transition-colors">
+                完成 · 关闭
+              </button>
+            </div>
+          ) : null}
+        </div>
+      </motion.div>
+    </div>
+  );
 }

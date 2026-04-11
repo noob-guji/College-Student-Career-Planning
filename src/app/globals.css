@@ -10,8 +10,62 @@
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
-@layer components {
+/* ─────────────────────────────────────────────
+   主题系统
+   data-theme="light"  → 默认
+   data-theme="dark"   → 深色
+   data-theme="system" → 跟随系统（由 JS 决定加哪个 class）
+───────────────────────────────────────────── */
+:root {
+  --bg-page:    #F8FAFC;
+  --bg-card:    #ffffff;
+  --bg-sidebar: #111827;
+  --text-main:  #0f172a;
+  --text-muted: #64748b;
+  --border:     #e2e8f0;
+  --accent:     #F59E0B;
+}
 
+/* 深色主题覆盖 */
+html[data-theme="dark"] {
+  --bg-page:    #0f172a;
+  --bg-card:    #1e293b;
+  --bg-sidebar: #020617;
+  --text-main:  #f1f5f9;
+  --text-muted: #94a3b8;
+  --border:     #334155;
+  --accent:     #F59E0B;
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+}
+
+html[data-theme="dark"] .bg-white {
+  background-color: var(--bg-card) !important;
+}
+
+html[data-theme="dark"] .bg-\[#F8FAFC\] {
+  background-color: var(--bg-page) !important;
+}
+
+html[data-theme="dark"] .text-slate-900 {
+  color: var(--text-main) !important;
+}
+
+html[data-theme="dark"] .text-slate-500,
+html[data-theme="dark"] .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .border-slate-200,
+html[data-theme="dark"] .border-slate-100 {
+  border-color: var(--border) !important;
+}
+
+@layer components {
   /* Neumorphism shadows */
   .neu-flat {
     box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.5), -8px -8px 16px rgba(255, 255, 255, 0.8);
@@ -19,6 +73,24 @@
 
   .neu-pressed {
     box-shadow: inset 8px 8px 16px rgba(163, 177, 198, 0.5), inset -8px -8px 16px rgba(255, 255, 255, 0.8);
+  }
+
+  /* ── 侧边栏滚动条隐藏 ── */
+  .sidebar-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .sidebar-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* ── 全局隐藏滚动条 class ── */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   /* Inverse border radius effect for active sidebar item */
@@ -31,7 +103,15 @@
     z-index: 10;
   }
 
-  /* Top concave corner */
+  html[data-theme="dark"] .sidebar-active-item {
+    background-color: var(--bg-page);
+  }
+
+  html[data-theme="dark"] .sidebar-active-item::before,
+  html[data-theme="dark"] .sidebar-active-item::after {
+    box-shadow: 5px 5px 0 5px var(--bg-page);
+  }
+
   .sidebar-active-item::before {
     content: '';
     position: absolute;
@@ -45,7 +125,6 @@
     pointer-events: none;
   }
 
-  /* Bottom concave corner */
   .sidebar-active-item::after {
     content: '';
     position: absolute;

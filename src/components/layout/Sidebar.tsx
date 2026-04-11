@@ -2,26 +2,24 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Compass, UserCircle, Settings, Map, BookMarked, Brain, FileText, GitBranch } from 'lucide-react';
-import { useSession } from 'next-auth/react';
+import { Home, Compass, UserCircle, Settings, Map, BookMarked, Brain, FileText, GitBranch, LogOut } from 'lucide-react';
+import { useSession, signOut } from 'next-auth/react';
+import { useState } from 'react';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { data: session } = useSession();
   const user = session?.user;
+  const [loggingOut, setLoggingOut] = useState(false);
 
   const displayName  = user?.name  ?? user?.email?.split('@')[0] ?? '未登录';
   const displayEmail = user?.email ?? '';
   const initial      = displayName[0]?.toUpperCase() ?? '?';
 
-  // 从 sessionStorage 读取专业信息（客户端）
-  const major = (() => {
-    if (typeof window === 'undefined') return '';
-    try {
-      const p = JSON.parse(sessionStorage.getItem('careerProfile') ?? '{}');
-      return p.major?.split('/')[0] ?? ''; // 取专业名（去掉院校）
-    } catch { return ''; }
-  })();
+  const handleLogout = async () => {
+    setLoggingOut(true);
+    await signOut({ callbackUrl: '/auth' });
+  };
 
   const navGroups = [
     {
@@ -71,15 +69,15 @@ export default function Sidebar() {
             <span className={`text-sm font-bold leading-tight ${pathname === '/profile' ? 'text-[#F59E0B]' : 'text-[#94A3B8] group-hover/profile:text-[#F59E0B]'}`}>
               {displayName}
             </span>
-            <span className={`text-xs mt-0.5 leading-tight opacity-80 truncate max-w-[140px] ${pathname === '/profile' ? 'text-[#F59E0B]' : 'text-[#94A3B8] group-hover/profile:text-[#F59E0B]'}`}>
+            <span className="text-xs mt-0.5 leading-tight opacity-60 text-[#94A3B8] truncate max-w-[140px]">
               {displayEmail}
             </span>
           </div>
         </Link>
       </div>
 
-      {/* Nav */}
-      <nav className="flex-1 pl-3 py-2 overflow-y-auto overflow-x-hidden space-y-1">
+      {/* Nav — 隐藏滚动条 */}
+      <nav className="flex-1 pl-3 py-2 overflow-y-auto overflow-x-hidden no-scrollbar space-y-1">
         {navGroups.map(group => (
           <div key={group.label}>
             <div className="px-3 py-1 mb-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -88,7 +86,7 @@ export default function Sidebar() {
               </span>
             </div>
             {group.items.map(item => {
-              const Icon = item.icon;
+              const Icon    = item.icon;
               const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
               return (
                 <Link key={item.name} href={item.href}
@@ -117,21 +115,17 @@ export default function Sidebar() {
         </Link>
       </nav>
 
-      {/* Footer — 专业信息 */}
-      <div className="py-4 px-5 shrink-0 overflow-hidden whitespace-nowrap">
-        <div className="flex items-center">
-          <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-amber-400 font-bold shrink-0 text-sm">
-            {initial}
+      {/* 退出登录 */}
+      <div className="py-3 px-3 shrink-0 overflow-hidden whitespace-nowrap border-t border-[#1F2937]">
+        <button onClick={handleLogout} disabled={loggingOut}
+          className="group/logout w-full flex items-center px-3 py-2.5 rounded-l-xl text-[#94A3B8] hover:text-red-400 transition-colors disabled:opacity-50">
+          <div className="flex items-center justify-center shrink-0 w-8 h-8 rounded-lg">
+            <LogOut className={`w-5 h-5 ${loggingOut ? 'animate-spin' : ''} text-[#94A3B8] group-hover/logout:text-red-400 transition-colors`} />
           </div>
-          <div className="ml-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <p className="text-sm font-medium text-[#94A3B8] group-hover:text-[#F59E0B] transition-colors truncate max-w-[130px]">
-              {major || '尚未填写专业'}
-            </p>
-            <p className="text-xs text-[#94A3B8] opacity-70 group-hover:text-[#F59E0B] group-hover:opacity-100 transition-colors">
-              {displayName}
-            </p>
-          </div>
-        </div>
+          <span className="ml-4 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm font-medium">
+            {loggingOut ? '退出中…' : '退出登录'}
+          </span>
+        </button>
       </div>
     </div>
   );

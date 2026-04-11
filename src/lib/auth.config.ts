@@ -1,6 +1,5 @@
 import type { NextAuthConfig } from "next-auth"
 
-// 这里只包含与数据库无关的配置，以便在 Middleware (Edge Runtime) 中运行
 export const authConfig = {
   pages: {
     signIn: "/auth",
@@ -8,21 +7,37 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
-      const isProtectedRoute = [
+
+      // 已登录用户访问 /auth 直接跳转首页
+      if (isLoggedIn && nextUrl.pathname.startsWith("/auth")) {
+        return Response.redirect(new URL("/home", nextUrl))
+      }
+
+      const protectedPaths = [
         "/home",
         "/profile",
         "/roles",
         "/self-cognition",
         "/person-post-matching",
-        "/settings"
-      ].some(path => nextUrl.pathname.startsWith(path))
+        "/settings",
+        // 新增页面保护
+        "/career-blueprint",
+        "/job-graph",
+        "/knowledge-hub",
+        "/ai-engine",
+      ]
+
+      const isProtectedRoute = protectedPaths.some(path =>
+        nextUrl.pathname.startsWith(path)
+      )
 
       if (isProtectedRoute) {
         if (isLoggedIn) return true
         return false // 重定向到登录页
       }
+
       return true
     },
   },
-  providers: [], // 在 auth.ts 中再添加真正的 provider
+  providers: [],
 } satisfies NextAuthConfig
