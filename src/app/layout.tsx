@@ -25,7 +25,7 @@ const themeInitScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh">
+    <html lang="zh" data-theme="light" suppressHydrationWarning>
       <head>
         {/* 主题初始化脚本 — 必须在所有样式之前执行 */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
