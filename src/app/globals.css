@@ -137,4 +137,28 @@ html[data-theme="dark"] .border-slate-100 {
     box-shadow: 5px -5px 0 5px #F8FAFC;
     pointer-events: none;
   }
+
+   /* 左侧目录滚动条美化 */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px; /* 滚动条宽度，越细越窄 */
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent; /* 轨道透明，不抢视觉 */
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #475569; /* 滚动条颜色（适配深色侧边栏的 slate-600） */
+    border-radius: 9999px; /* 圆角，更柔和 */
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: #64748b; /*  hover 时变亮一点 */
+  }
+
+  /* 兼容Firefox */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #475569 transparent;
+  }
 }

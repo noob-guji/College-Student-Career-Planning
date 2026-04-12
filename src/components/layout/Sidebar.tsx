@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Compass, UserCircle, Settings, Map, BookMarked, Brain, FileText, GitBranch, LogOut } from 'lucide-react';
+import { Home, Compass, UserCircle, Settings, Map, BookMarked, Brain, FileText, GitBranch, LogOut, PenTool } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -27,6 +27,7 @@ export default function Sidebar() {
       items: [
         { name: '首页',         href: '/home',                 icon: Home },
         { name: '岗位认知中心', href: '/roles',                icon: Compass },
+        { name: '岗位智绘', href: '/job-portrait',          icon: PenTool },
         { name: '岗位图谱',     href: '/job-graph',            icon: GitBranch },
         { name: '自我认知中心', href: '/self-cognition',       icon: UserCircle },
         { name: '人岗匹配中心', href: '/person-post-matching', icon: Map },

@@ -1,0 +1,32 @@
+{
+    "default": {
+        "basic_requirements": 0.20,
+        "professional_skills": 0.50,
+        "professional_competence": 0.20,
+        "development_potential": 0.10
+    },
+    "技术研发类": {
+        "basic_requirements": 0.15,
+        "professional_skills": 0.60,
+        "professional_competence": 0.15,
+        "development_potential": 0.10
+    },
+    "产品设计类": {
+        "basic_requirements": 0.15,
+        "professional_skills": 0.45,
+        "professional_competence": 0.25,
+        "development_potential": 0.15
+    },
+    "市场销售类": {
+        "basic_requirements": 0.10,
+        "professional_skills": 0.30,
+        "professional_competence": 0.40,
+        "development_potential": 0.20
+    },
+    "数据分析类": {
+        "basic_requirements": 0.20,
+        "professional_skills": 0.55,
+        "professional_competence": 0.15,
+        "development_potential": 0.10
+    }
+}
