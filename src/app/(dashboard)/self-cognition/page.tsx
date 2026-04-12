@@ -2,7 +2,7 @@
 
 import CapabilityInputForm from '@/features/self-cognition/components/CapabilityInputForm';
 import CapabilityPortraitDashboard from '@/features/self-cognition/components/CapabilityPortraitDashboard';
-import AIAssistantWidget from '@/features/dashboard-core/components/AIAssistantWidget';
+import ResumeParseResult from '@/features/self-cognition/components/ResumeParseResult';
 
 export default function SelfCognition() {
     return (
@@ -36,9 +36,9 @@ export default function SelfCognition() {
                     </div>
                 </div>
 
-                {/* Right Column: AI Assistant */}
+                {/* Right Column: Resume Parse Result */}
                 <div className="lg:col-span-4 xl:col-span-1 h-[600px] xl:h-full flex flex-col min-h-0 overflow-hidden">
-                    <AIAssistantWidget variant="static" />
+                    <ResumeParseResult />
                 </div>
             </div>
         </div>

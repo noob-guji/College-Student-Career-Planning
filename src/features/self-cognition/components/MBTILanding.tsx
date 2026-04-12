@@ -51,7 +51,7 @@ export default function MBTILanding() {
       <div className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-slate-50 rounded-full blur-3xl opacity-50 z-0 -translate-y-1/2 translate-x-1/3" />
 
       {/* Header */}
-      <div className="text-center max-w-2xl mt-4 mb-12 relative z-50 flex flex-col items-center">
+      <div className="text-center max-w-2xl mt-4 mb-6 relative z-50 flex flex-col items-center">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
           MBTI深度测评问卷
         </h2>
@@ -106,24 +106,24 @@ export default function MBTILanding() {
       </div>
 
       {/* Cards — 点击传 typeId */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-4xl pb-10 relative z-10 px-2 lg:px-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-3xl mx-auto relative z-10 overflow-y-auto max-h-[60vh] no-scrollbar">
         {PERSONALITY_TYPES.map((type) => (
           <div key={type.id} onClick={() => setSelectedTypeId(type.id)}
-            className={`group relative flex flex-col items-center justify-center text-center overflow-hidden bg-white/80 backdrop-blur-xl rounded-[2rem] border border-slate-100 shadow-sm transition-all duration-300 transform hover:-translate-y-1 cursor-pointer p-8 sm:p-10 ${type.hoverBorder} ${type.hoverShadow}`}>
-            <div className={`absolute inset-0 bg-gradient-to-b opacity-60 z-0 ${type.color}`} />
-            <div className="relative z-10 flex flex-col items-center w-full">
+            className={`group relative flex flex-col items-center text-center bg-white/80 backdrop-blur-xl rounded-[2rem] border border-slate-100 shadow-sm hover:-translate-y-1 transition-all cursor-pointer p-6 ${type.hoverBorder}`}>
+            <div className={`absolute inset-0 bg-gradient-to-b opacity-60 ${type.color}`} />
+            <div className="relative z-10 w-full">
               <div className="relative mb-6">
-                <div className={`w-20 h-20 rounded-full flex items-center justify-center ${type.iconBg} ${type.iconColor} shadow-inner ring-4 ring-white`}>
+                <div className={`w-16 h-16 rounded-full flex items-center justify-center ${type.iconBg} ${type.iconColor} shadow-inner ring-4 ring-white`}>
                   {type.icon}
                 </div>
-                <div className={`absolute -top-1 -right-3 ${type.badgeBg} text-white text-xs font-black px-2.5 py-1 rounded-full shadow-lg border-2 border-white tracking-widest`}>
+                <div className={`absolute -top-1 -right-3 ${type.badgeBg} text-white text-xs font-black px-2.5 py-1 rounded-full shadow-lg border-2 border-white`}>
                   {type.badge}
                 </div>
               </div>
-              <h3 className="text-2xl font-black text-slate-900 mb-2 tracking-wide">{type.title}</h3>
-              <div className="text-xs font-bold text-slate-400 tracking-[0.2em] mb-4 uppercase">{type.examples}</div>
-              <p className="text-sm md:text-base text-slate-500 font-medium">{type.summary}</p>
-              <div className="mt-4 text-xs text-slate-400 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <h3 className="text-xl font-black text-slate-900 mb-2">{type.title}</h3>
+              <div className="text-xs font-bold text-slate-400 tracking-widest mb-4 uppercase">{type.examples}</div>
+              <p className="text-sm text-slate-500">{type.summary}</p>
+              <div className="mt-4 text-xs text-slate-400 flex items-center gap-1 opacity-0 group-hover:opacity-100">
                 点击查看详情 <ChevronRight className="w-3 h-3" />
               </div>
             </div>

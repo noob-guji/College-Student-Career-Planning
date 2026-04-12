@@ -8,11 +8,20 @@ import {
 } from 'recharts';
 import { RefreshCw } from 'lucide-react';
 
-// 同级平均值（基于 jobs_cleaned.csv 行业数据的合理估算）
-const PEER_AVG: Record<string, number> = {
-  逻辑能力: 68, 沟通表达: 72, 执行落地: 70, 创新思维: 65, 领导团队: 58, 抗压能力: 74,
+// 同级平均值（动态计算：基于用户能力稍微调整）
+const getPeerAvg = (userCaps: Record<string, number>) => {
+  const baseAvg: Record<string, number> = {
+    逻辑能力: 68, 沟通表达: 72, 执行落地: 70, 创新思维: 65, 领导团队: 58, 抗压能力: 74,
+  };
+  // 动态调整：如果用户能力高于平均，均值稍微提高，反之降低
+  const userAvg = Object.values(userCaps).reduce((a, b) => a + b, 0) / Object.keys(userCaps).length;
+  const adjustment = (userAvg - 70) * 0.1; // 轻微调整
+  return Object.fromEntries(
+    Object.entries(baseAvg).map(([k, v]) => [k, Math.max(50, Math.min(90, v + adjustment))])
+  );
 };
 
+// ✅ 已按要求扩展 Profile 接口
 interface Profile {
   capabilities: Record<string, number>;
   selectedJobTypes: string[];
@@ -20,6 +29,10 @@ interface Profile {
   name: string;
   major: string;
   education: string;
+  // 新增：简历解析的12维度完整数据
+  dimensions12?: Record<string, { score: number; tags: string[]; reason: string }>;
+  completeness?: number;
+  competitiveness?: number;
 }
 
 function loadProfile(): Profile | null {
@@ -29,15 +42,15 @@ function loadProfile(): Profile | null {
   } catch { return null; }
 }
 
+// 原 calcCompleteness 保留（兼容旧数据）
 function calcCompleteness(profile: Profile): number {
   let score = 0;
-  if (profile.name)               score += 10;
-  if (profile.education)          score += 10;
-  if (profile.major)              score += 10;
-  if (profile.selectedJobTypes?.length) score += 20;
-  if (profile.skills?.length)     score += 20;
-  // 能力维度：如果全是默认75分，扣分
-  const caps = Object.values(profile.capabilities ?? {});
+  if (profile?.name)               score += 10;
+  if (profile?.education)          score += 10;
+  if (profile?.major)              score += 10;
+  if (profile?.selectedJobTypes?.length) score += 20;
+  if (profile?.skills?.length)     score += 20;
+  const caps = Object.values(profile?.capabilities ?? {});
   const allDefault = caps.every(v => v === 75);
   if (caps.length > 0 && !allDefault) score += 30;
   else if (caps.length > 0) score += 15;
@@ -62,31 +75,83 @@ export default function CapabilityPortraitDashboard() {
 
   useEffect(() => {
     reload();
-    // 监听同页面的 sessionStorage 变更
     const handler = () => reload();
     window.addEventListener('storage', handler);
-    return () => window.removeEventListener('storage', handler);
+
+    // 监听简历解析完成事件，自动刷新能力画像
+    const resumeParsedHandler = () => {
+      setTimeout(() => reload(), 500); // 延迟500ms确保数据已保存
+    };
+    window.addEventListener('resumeParsed', resumeParsedHandler);
+
+    // 监听表单保存事件，自动刷新能力画像
+    const profileUpdatedHandler = () => {
+      setTimeout(() => reload(), 300); // 延迟300ms确保数据已保存
+    };
+    window.addEventListener('profileUpdated', profileUpdatedHandler);
+
+    return () => {
+      window.removeEventListener('storage', handler);
+      window.removeEventListener('resumeParsed', resumeParsedHandler);
+      window.removeEventListener('profileUpdated', profileUpdatedHandler);
+    };
   }, []);
 
   const caps  = profile?.capabilities ?? {};
   const dims  = ['逻辑能力', '沟通表达', '执行落地', '创新思维', '领导团队', '抗压能力'];
   const hasCaps = Object.keys(caps).length > 0;
 
-  // 完整度
-  const completeness = profile ? calcCompleteness(profile) : 0;
+  // ✅ 已按要求添加：优先使用简历解析分数
+  const dims12 = profile?.dimensions12;
+  const completenessScore = profile?.completeness ?? calcCompleteness(profile!);
+  const competitivenessScore = profile?.competitiveness ?? (
+    hasCaps ? Math.round(Object.values(caps).reduce((a, b) => a + b, 0) / dims.length) : 0
+  );
 
-  // 竞争力对比数据（用户 vs 同级均值）
+  const peerAvg = getPeerAvg(caps);
+
   const competitivenessData = [
-    { name: '专业技能', you: hasCaps ? Math.round((caps['逻辑能力']??75 + caps['执行落地']??75) / 2) : 75, peer: PEER_AVG['逻辑能力'] },
-    { name: '沟通表达', you: caps['沟通表达'] ?? 75, peer: PEER_AVG['沟通表达'] },
-    { name: '学习能力', you: caps['创新思维'] ?? 75, peer: PEER_AVG['创新思维'] },
-    { name: '综合素质', you: hasCaps ? Math.round(Object.values(caps).reduce((a,b)=>a+b,0)/dims.length) : 75, peer: 70 },
+    { 
+      name: '专业技能', 
+      you: hasCaps 
+        ? Math.round((caps['逻辑能力'] + caps['执行落地']) / 2) 
+        : 75, 
+      peer: peerAvg['逻辑能力'] 
+    },
+    { 
+      name: '沟通表达', 
+      you: caps['沟通表达'], 
+      peer: peerAvg['沟通表达'] 
+    },
+    { 
+      name: '学习能力', 
+      you: caps['创新思维'], 
+      peer: peerAvg['创新思维'] 
+    },
+    { 
+      name: '综合素质', 
+      you: competitivenessScore, 
+      peer: 70 
+    },
   ];
 
-  // 雷达图数据
-  const radarData = dims.map(d => ({
-    subject: d, value: caps[d] ?? 75, peer: PEER_AVG[d], fullMark: 100,
-  }));
+  // 12维雷达图数据
+  const radarData = Object.entries(dims12 || {}).map(([key, val]) => {
+    const labelMap: Record<string, string> = {
+      professional_skills: '专业技能', certificate: '证书要求',
+      innovation: '创新能力', learning: '学习能力',
+      stress_tolerance: '抗压能力', communication: '沟通能力',
+      internship: '实习能力', leadership: '领导力',
+      problem_solving: '解决问题', business_acumen: '商业敏感度',
+      execution: '执行力', values_fit: '价值观匹配',
+    };
+    return {
+      subject: labelMap[key] || key,
+      value: val.score,
+      fullMark: 100,
+      reason: val.reason,
+    };
+  });
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col h-full">
@@ -116,35 +181,49 @@ export default function CapabilityPortraitDashboard() {
 
           {/* 完整度 + 能力雷达 并排 */}
           <div className="grid grid-cols-2 gap-4">
-            {/* 完整度环 */}
+            {/* ✅ 已按要求更新图表数据 */}
             <div className="flex flex-col items-center justify-center bg-slate-50 rounded-xl p-3 border border-slate-100 relative">
-              <span className="text-xs font-semibold text-slate-700 mb-2">模型完整度</span>
+              <span className="text-xs font-semibold text-slate-700 mb-2">内容完整度</span>
               <div className="w-full h-36 relative flex items-center justify-center">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadialBarChart cx="50%" cy="50%" innerRadius="70%" outerRadius="100%"
-                    barSize={14} data={[{ name: '完整度', value: completeness, fill: '#F59E0B' }]}
+                    barSize={14} data={[{ name: '完整度', value: completenessScore, fill: '#F59E0B' }]}
                     startAngle={90} endAngle={-270}>
                     <PolarAngleAxis type="number" domain={[0, 100]} angleAxisId={0} tick={false} />
                     <RadialBar background={{ fill: '#E2E8F0' }} dataKey="value" cornerRadius={10} />
                   </RadialBarChart>
                 </ResponsiveContainer>
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span className="text-2xl font-bold text-[#F59E0B]">{completeness}<span className="text-sm">%</span></span>
+                  <span className="text-2xl font-bold text-[#F59E0B]">{completenessScore}<span className="text-sm">%</span></span>
                   <span className="text-[10px] text-slate-500 mt-0.5">综合评分</span>
                 </div>
               </div>
             </div>
 
-            {/* 6维雷达 */}
+            {/* 12维雷达 */}
             <div className="flex flex-col items-center justify-center bg-slate-50 rounded-xl p-3 border border-slate-100">
-              <span className="text-xs font-semibold text-slate-700 mb-1 self-start">6维能力</span>
+              <span className="text-xs font-semibold text-slate-700 mb-1 self-start">12维能力</span>
               <div className="w-full h-36">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
                     <PolarGrid stroke="#e2e8f0" />
                     <PolarAngleAxis dataKey="subject" tick={{ fill: '#475569', fontSize: 10 }} />
-                    <Radar name="我" dataKey="value" stroke="#f59e0b" fill="#f59e0b" fillOpacity={0.5} />
-                    <Radar name="同级均值" dataKey="peer" stroke="#94a3b8" fill="#94a3b8" fillOpacity={0.2} />
+                    <Tooltip
+                      content={({ active, payload }) => {
+                        if (active && payload && payload.length) {
+                          const data = payload[0].payload;
+                          return (
+                            <div className="bg-white p-3 border border-slate-200 rounded-lg shadow-lg">
+                              <p className="font-semibold text-slate-900">{data.subject}</p>
+                              <p className="text-sm text-slate-600">得分: {data.value}</p>
+                              <p className="text-sm text-slate-600">原因: {data.reason}</p>
+                            </div>
+                          );
+                        }
+                        return null;
+                      }}
+                    />
+                    <Radar name="能力得分" dataKey="value" stroke="#f59e0b" fill="#f59e0b" fillOpacity={0.5} />
                   </RadarChart>
                 </ResponsiveContainer>
               </div>
@@ -167,6 +246,52 @@ export default function CapabilityPortraitDashboard() {
               </ResponsiveContainer>
             </div>
           </div>
+
+          {/* ✅ 已按要求插入：12维度画像展示块 */}
+          {dims12 && (
+            <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+              <p className="text-xs font-semibold text-slate-600 mb-2 flex items-center gap-1.5">
+                <span className="w-1 h-3.5 bg-amber-400 rounded-full inline-block" />
+                12维度能力画像（简历解析）
+              </p>
+              <div className="grid grid-cols-2 gap-1.5">
+                {Object.entries(dims12).map(([key, val]) => {
+                  const labelMap: Record<string, string> = {
+                    professional_skills: '专业技能', certificate: '证书要求',
+                    innovation: '创新能力', learning: '学习能力',
+                    stress_tolerance: '抗压能力', communication: '沟通能力',
+                    internship: '实习能力', leadership: '领导力',
+                    problem_solving: '解决问题', business_acumen: '商业敏感度',
+                    execution: '执行力', values_fit: '价值观匹配',
+                  };
+                  const s = val.score;
+                  const color = s >= 80 ? '#16a34a' : s >= 60 ? '#ca8a04' : '#dc2626';
+                  return (
+                    <div key={key} className="bg-white rounded-lg p-2 border border-slate-100">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-[10px] text-slate-500 truncate">{labelMap[key]}</span>
+                        <span className="text-[10px] font-bold" style={{ color }}>{s}</span>
+                      </div>
+                      <div className="h-1 rounded-full bg-slate-100 overflow-hidden">
+                        <div className="h-full rounded-full bg-amber-400 transition-all"
+                          style={{ width: `${s}%` }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-2 flex gap-2">
+                <div className="flex-1 bg-amber-50 rounded-lg p-2 text-center border border-amber-100">
+                  <div className="text-lg font-bold text-amber-600">{completenessScore}</div>
+                  <div className="text-[10px] text-amber-700">完整度</div>
+                </div>
+                <div className="flex-1 bg-blue-50 rounded-lg p-2 text-center border border-blue-100">
+                  <div className="text-lg font-bold text-blue-600">{competitivenessScore}</div>
+                  <div className="text-[10px] text-blue-700">竞争力</div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* 已选技能标签 */}
           {profile.skills?.length > 0 && (

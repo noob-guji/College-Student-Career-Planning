@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Sparkles, Target, TrendingUp, Map, ClipboardList,
@@ -66,7 +66,6 @@ const sectionConfig = [
   { id: 'evaluation', label: '评估机制', icon: CheckCircle2, color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-200' },
 ];
 
-// 进度步骤显示
 const generationSteps = [
   '解析能力画像数据...',
   '匹配行业岗位知识库...',
@@ -98,12 +97,32 @@ export default function CareerBlueprintGenerator({
   const [error, setError] = useState('');
   const reportRef = useRef<HTMLDivElement>(null);
 
+  // ====================== 【要求添加：读取匹配结果】 ======================
+  const [matchedJobs, setMatchedJobs] = useState<Array<{ jobTitle: string; company: string; overall: number; fourDim: any }>>([]);
+  const [selectedJob, setSelectedJob] = useState<{ jobTitle: string; company: string; overall: number; fourDim: any } | null>(null);
+
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem('matchResult');
+      if (raw) {
+        const d = JSON.parse(raw);
+        if (Array.isArray(d)) {
+          setMatchedJobs(d);
+          setSelectedJob(d[0]); // 默认选择第一个
+        } else {
+          setMatchedJobs([d]);
+          setSelectedJob(d);
+        }
+      }
+    } catch {}
+  }, []);
+  // ======================================================================
+
   const handleGenerate = async () => {
     setStatus('generating');
     setGenerationStep(0);
     setError('');
 
-    // 模拟分步进度
     const stepInterval = setInterval(() => {
       setGenerationStep(prev => {
         if (prev < generationSteps.length - 2) return prev + 1;
@@ -116,9 +135,11 @@ export default function CareerBlueprintGenerator({
       const res = await fetch('/api/ai/generate-report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+
+        // ====================== 【要求修改：fetch body】 ======================
         body: JSON.stringify({
-          targetRole,
-          matchScore,
+          targetRole: selectedJob?.jobTitle || targetRole,
+          matchScore: selectedJob?.overall || matchScore,
           userProfile: {
             major: '计算机科学',
             grade: '大三',
@@ -127,8 +148,10 @@ export default function CareerBlueprintGenerator({
               subject: c.subject,
               score: c.score,
             })),
+            matchGaps: selectedJob?.fourDim?.gaps?.map((g: any) => g.dim) ?? [],
           },
         }),
+        // ======================================================================
       });
 
       clearInterval(stepInterval);
@@ -150,8 +173,6 @@ export default function CareerBlueprintGenerator({
       setStatus('error');
     }
   };
-
-  // ========== 各模块渲染 ==========
 
   const renderConclusion = (data: ReportData['conclusion']) => (
     <div className="space-y-5">
@@ -384,8 +405,6 @@ export default function CareerBlueprintGenerator({
     }
   };
 
-  // ========== 状态渲染 ==========
-
   if (status === 'idle') {
     return (
       <motion.div
@@ -420,7 +439,15 @@ export default function CareerBlueprintGenerator({
           <Sparkles className="w-4 h-4" />
           立即生成职业生涯蓝图
         </button>
-        <p className="text-xs text-slate-400">基于目标岗位：{targetRole} · 匹配度 {matchScore}%</p>
+
+        {/* ====================== 【要求修改：显示文字】 ====================== */}
+        <p className="text-xs text-slate-400">
+          {selectedJob
+            ? `基于匹配岗位：${selectedJob.jobTitle} · 匹配度 ${selectedJob.overall}%`
+            : `目标岗位：${targetRole} · 匹配度 ${matchScore}%`
+          }
+        </p>
+        {/* ====================================================================== */}
       </motion.div>
     );
   }
@@ -472,7 +499,6 @@ export default function CareerBlueprintGenerator({
     );
   }
 
-  // Done: show the report
   const activeConfig = sectionConfig.find(s => s.id === activeSection)!;
 
   return (
@@ -481,8 +507,26 @@ export default function CareerBlueprintGenerator({
       animate={{ opacity: 1 }}
       className="flex flex-col h-full"
     >
-      {/* Nav tabs */}
       <div className="flex gap-1.5 p-3 bg-slate-50 border-b border-slate-200 overflow-x-auto shrink-0">
+        {matchedJobs.length > 1 && (
+          <div className="flex items-center gap-2 mr-4">
+            <span className="text-xs font-medium text-slate-600">选择岗位：</span>
+            <select
+              value={selectedJob?.jobTitle || ''}
+              onChange={(e) => {
+                const job = matchedJobs.find(j => j.jobTitle === e.target.value);
+                setSelectedJob(job || null);
+              }}
+              className="text-xs px-2 py-1 border border-slate-300 rounded-md bg-white"
+            >
+              {matchedJobs.map((job, i) => (
+                <option key={i} value={job.jobTitle}>
+                  {job.jobTitle} ({job.overall}%匹配)
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         {sectionConfig.map(s => {
           const Icon = s.icon;
           const isActive = activeSection === s.id;
@@ -510,7 +554,6 @@ export default function CareerBlueprintGenerator({
         </button>
       </div>
 
-      {/* Section header */}
       <div className={`px-5 pt-4 pb-3 ${activeConfig.bg} border-b ${activeConfig.border} shrink-0`}>
         <div className={`flex items-center gap-2 font-bold text-base ${activeConfig.color}`}>
           <activeConfig.icon className="w-4 h-4" />
@@ -518,7 +561,6 @@ export default function CareerBlueprintGenerator({
         </div>
       </div>
 
-      {/* Section content */}
       <div className="flex-1 overflow-y-auto p-5" ref={reportRef}>
         <AnimatePresence mode="wait">
           <motion.div
