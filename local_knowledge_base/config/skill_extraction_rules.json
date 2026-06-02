@@ -1,0 +1,2958 @@
+{
+    "patterns": [
+        {
+            "skill": "Python",
+            "category": "编程语言",
+            "aliases": [
+                "python3",
+                "py",
+                "python开发",
+                "pyhton"
+            ],
+            "regex": "\\b([Pp]ython(3)?|py)\\b",
+            "keywords": [
+                "脚本语言",
+                "数据处理",
+                "机器学习编程"
+            ]
+        },
+        {
+            "skill": "Java",
+            "category": "编程语言",
+            "aliases": [
+                "java开发",
+                "java后端"
+            ],
+            "regex": "\\b[Jj]ava\\b",
+            "keywords": [
+                "后端开发",
+                "企业级开发"
+            ]
+        },
+        {
+            "skill": "C++",
+            "category": "编程语言",
+            "aliases": [
+                "cpp"
+            ],
+            "regex": "(?<![a-zA-Z0-9_])(C\\+\\+|[Cc]pp)(?![a-zA-Z0-9_])",
+            "keywords": [
+                "系统编程",
+                "高性能开发"
+            ]
+        },
+        {
+            "skill": "C",
+            "category": "编程语言",
+            "aliases": [
+                "c语言"
+            ],
+            "regex": "(?<![a-zA-Z0-9_])C(?![a-zA-Z0-9_#+])",
+            "keywords": [
+                "底层开发",
+                "嵌入式开发"
+            ]
+        },
+        {
+            "skill": "C#",
+            "category": "编程语言",
+            "aliases": [
+                "csharp"
+            ],
+            "regex": "(?<![a-zA-Z0-9_])C#(?![a-zA-Z0-9_])",
+            "keywords": [
+                "桌面开发",
+                "Unity开发"
+            ]
+        },
+        {
+            "skill": "JavaScript",
+            "category": "编程语言",
+            "aliases": [
+                "js",
+                "JS"
+            ],
+            "regex": "\\b([Jj]ava[Ss]cript|JS|js)\\b",
+            "keywords": [
+                "前端开发",
+                "网页脚本"
+            ]
+        },
+        {
+            "skill": "Go",
+            "category": "编程语言",
+            "aliases": [
+                "golang"
+            ],
+            "regex": "\\b(Go|Golang|golang)\\b",
+            "keywords": [
+                "后端开发",
+                "云原生开发"
+            ]
+        },
+        {
+            "skill": "R",
+            "category": "编程语言",
+            "aliases": [
+                "r语言"
+            ],
+            "regex": "\\bR(?:\\d+(?:\\.\\d+)?)?\\b",
+            "keywords": [
+                "统计分析",
+                "数据建模"
+            ]
+        },
+        {
+            "skill": "HTML",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bHTML\\b",
+            "keywords": [
+                "网页结构",
+                "超文本标记语言"
+            ]
+        },
+        {
+            "skill": "HTML5",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bHTML5\\b",
+            "keywords": [
+                "网页新标准",
+                "移动端网页"
+            ]
+        },
+        {
+            "skill": "CSS",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bCSS\\b",
+            "keywords": [
+                "网页样式",
+                "样式表"
+            ]
+        },
+        {
+            "skill": "CSS3",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bCSS3\\b",
+            "keywords": [
+                "样式新标准",
+                "动画效果"
+            ]
+        },
+        {
+            "skill": "Vue",
+            "category": "前端开发",
+            "aliases": [
+                "vuejs"
+            ],
+            "regex": "\\b(Vue|Vue\\.?js)\\b",
+            "keywords": [
+                "前端框架",
+                "渐进式框架"
+            ]
+        },
+        {
+            "skill": "React",
+            "category": "前端开发",
+            "aliases": [
+                "reactjs"
+            ],
+            "regex": "\\b(React|React\\.?js)\\b",
+            "keywords": [
+                "前端框架",
+                "组件化开发"
+            ]
+        },
+        {
+            "skill": "Angular",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bAngular\\b",
+            "keywords": [
+                "前端框架",
+                "企业级开发"
+            ]
+        },
+        {
+            "skill": "ES6",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bES6\\b",
+            "keywords": [
+                "JS语法",
+                "ECMAScript6"
+            ]
+        },
+        {
+            "skill": "Ajax",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bAjax\\b",
+            "keywords": [
+                "异步请求",
+                "前后端交互"
+            ]
+        },
+        {
+            "skill": "TypeScript",
+            "category": "前端开发",
+            "aliases": [
+                "ts"
+            ],
+            "regex": "\\b(TypeScript|TS|ts)\\b",
+            "keywords": [
+                "JS超集",
+                "类型安全"
+            ]
+        },
+        {
+            "skill": "Webpack",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bWebpack\\b",
+            "keywords": [
+                "打包工具",
+                "前端构建"
+            ]
+        },
+        {
+            "skill": "Vite",
+            "category": "前端开发",
+            "aliases": [],
+            "regex": "\\bVite\\b",
+            "keywords": [
+                "构建工具",
+                "极速打包"
+            ]
+        },
+        {
+            "skill": "Spring Boot",
+            "category": "后端开发",
+            "aliases": [
+                "springboot"
+            ],
+            "regex": "\\b[Ss]pring ?[Bb]oot\\b",
+            "keywords": [
+                "后端框架",
+                "微服务开发"
+            ]
+        },
+        {
+            "skill": "Spring",
+            "category": "后端开发",
+            "aliases": [],
+            "regex": "\\b[Ss]pring\\b",
+            "keywords": [
+                "核心框架",
+                "IOC容器"
+            ]
+        },
+        {
+            "skill": "MyBatis",
+            "category": "后端开发",
+            "aliases": [],
+            "regex": "\\b[Mm]y[Bb]atis\\b",
+            "keywords": [
+                "ORM框架",
+                "数据库操作"
+            ]
+        },
+        {
+            "skill": "微服务",
+            "category": "后端开发",
+            "aliases": [],
+            "regex": "微服务",
+            "keywords": [
+                "分布式",
+                "服务架构"
+            ]
+        },
+        {
+            "skill": "MySQL",
+            "category": "数据库技术",
+            "aliases": [
+                "mysql数据库"
+            ],
+            "regex": "\\b[Mm]y[Ss][Qq][Ll]\\b",
+            "keywords": [
+                "关系型数据库",
+                "开源数据库"
+            ]
+        },
+        {
+            "skill": "SQL",
+            "category": "数据库技术",
+            "aliases": [
+                "sql查询"
+            ],
+            "regex": "\\b[Ss]QL\\b",
+            "keywords": [
+                "数据查询",
+                "数据库语言"
+            ]
+        },
+        {
+            "skill": "Oracle",
+            "category": "数据库技术",
+            "aliases": [],
+            "regex": "\\bOracle\\b",
+            "keywords": [
+                "商业数据库",
+                "企业级数据库"
+            ]
+        },
+        {
+            "skill": "SQL Server",
+            "category": "数据库技术",
+            "aliases": [],
+            "regex": "\\bSQL ?[Ss]erver\\b",
+            "keywords": [
+                "微软数据库",
+                "关系型数据库"
+            ]
+        },
+        {
+            "skill": "Redis",
+            "category": "数据库技术",
+            "aliases": [],
+            "regex": "\\bRedis\\b",
+            "keywords": [
+                "缓存数据库",
+                "内存数据库"
+            ]
+        },
+        {
+            "skill": "Hive",
+            "category": "数据库技术",
+            "aliases": [],
+            "regex": "\\bHive\\b",
+            "keywords": [
+                "数据仓库",
+                "大数据SQL"
+            ]
+        },
+        {
+            "skill": "MongoDB",
+            "category": "数据库技术",
+            "aliases": [],
+            "regex": "\\bMongoDB\\b",
+            "keywords": [
+                "非关系型数据库",
+                "文档数据库"
+            ]
+        },
+        {
+            "skill": "数据库设计",
+            "category": "数据库技术",
+            "aliases": [],
+            "regex": "数据库设计",
+            "keywords": [
+                "表结构设计",
+                "数据建模"
+            ]
+        },
+        {
+            "skill": "数据库管理",
+            "category": "数据库技术",
+            "aliases": [],
+            "regex": "数据库管理",
+            "keywords": [
+                "DBA",
+                "数据维护"
+            ]
+        },
+        {
+            "skill": "大数据分析",
+            "category": "大数据与AI",
+            "aliases": [],
+            "regex": "大数据分析",
+            "keywords": [
+                "海量数据",
+                "数据挖掘"
+            ]
+        },
+        {
+            "skill": "Spark",
+            "category": "大数据与AI",
+            "aliases": [],
+            "regex": "\\bSpark\\b",
+            "keywords": [
+                "大数据计算",
+                "分布式计算"
+            ]
+        },
+        {
+            "skill": "Hadoop",
+            "category": "大数据与AI",
+            "aliases": [],
+            "regex": "\\bHadoop\\b",
+            "keywords": [
+                "大数据生态",
+                "分布式存储"
+            ]
+        },
+        {
+            "skill": "Flink",
+            "category": "大数据与AI",
+            "aliases": [],
+            "regex": "\\bFlink\\b",
+            "keywords": [
+                "实时计算",
+                "流处理"
+            ]
+        },
+        {
+            "skill": "人工智能",
+            "category": "大数据与AI",
+            "aliases": [
+                "AI"
+            ],
+            "regex": "人工智能|\\b[Aa][Ii]\\b",
+            "keywords": [
+                "智能算法",
+                "机器学习"
+            ]
+        },
+        {
+            "skill": "机器学习",
+            "category": "大数据与AI",
+            "aliases": [
+                "ML"
+            ],
+            "regex": "机器学习|\\bML\\b",
+            "keywords": [
+                "模型训练",
+                "监督学习"
+            ]
+        },
+        {
+            "skill": "深度学习",
+            "category": "大数据与AI",
+            "aliases": [
+                "DL"
+            ],
+            "regex": "深度学习|\\bDL\\b",
+            "keywords": [
+                "神经网络",
+                "AI模型"
+            ]
+        },
+        {
+            "skill": "软件测试",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "软件测试",
+            "keywords": [
+                "质量保障",
+                "功能验证"
+            ]
+        },
+        {
+            "skill": "功能测试",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "功能测试",
+            "keywords": [
+                "黑盒测试",
+                "业务测试"
+            ]
+        },
+        {
+            "skill": "自动化测试",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "自动化测试",
+            "keywords": [
+                "自动化工具",
+                "脚本测试"
+            ]
+        },
+        {
+            "skill": "接口测试",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "接口测试",
+            "keywords": [
+                "API测试",
+                "前后端接口"
+            ]
+        },
+        {
+            "skill": "性能测试",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "性能测试",
+            "keywords": [
+                "压力测试",
+                "负载测试"
+            ]
+        },
+        {
+            "skill": "安全测试",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "安全测试",
+            "keywords": [
+                "漏洞检测",
+                "渗透测试"
+            ]
+        },
+        {
+            "skill": "稳定性测试",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "稳定性测试",
+            "keywords": [
+                "可靠性测试",
+                "长时间运行"
+            ]
+        },
+        {
+            "skill": "可靠性测试",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "可靠性测试",
+            "keywords": [
+                "稳定性测试",
+                "产品质量"
+            ]
+        },
+        {
+            "skill": "Selenium",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "\\bSelenium\\b",
+            "keywords": [
+                "自动化测试工具",
+                "Web测试"
+            ]
+        },
+        {
+            "skill": "Robot Framework",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "\\bRobot ?[Ff]ramework\\b",
+            "keywords": [
+                "自动化测试框架",
+                "关键字驱动"
+            ]
+        },
+        {
+            "skill": "测试用例编写",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "测试用例编写",
+            "keywords": [
+                "用例设计",
+                "测试方案"
+            ]
+        },
+        {
+            "skill": "测试计划制定",
+            "category": "软件测试",
+            "aliases": [],
+            "regex": "测试计划制定",
+            "keywords": [
+                "测试规划",
+                "测试流程"
+            ]
+        },
+        {
+            "skill": "Linux",
+            "category": "运维与服务器",
+            "aliases": [
+                "ubuntu",
+                "centos"
+            ],
+            "regex": "\\b[Ll]inux\\b",
+            "keywords": [
+                "服务器系统",
+                "开源系统"
+            ]
+        },
+        {
+            "skill": "服务器",
+            "category": "运维与服务器",
+            "aliases": [],
+            "regex": "服务器",
+            "keywords": [
+                "服务部署",
+                "硬件服务器"
+            ]
+        },
+        {
+            "skill": "Docker",
+            "category": "运维与服务器",
+            "aliases": [],
+            "regex": "\\bDocker\\b",
+            "keywords": [
+                "容器化",
+                "环境部署"
+            ]
+        },
+        {
+            "skill": "Kubernetes",
+            "category": "运维与服务器",
+            "aliases": [
+                "k8s"
+            ],
+            "regex": "\\b(Kubernetes|k8s)\\b",
+            "keywords": [
+                "容器编排",
+                "云原生"
+            ]
+        },
+        {
+            "skill": "Nginx",
+            "category": "运维与服务器",
+            "aliases": [],
+            "regex": "\\bNginx\\b",
+            "keywords": [
+                "反向代理",
+                "Web服务器"
+            ]
+        },
+        {
+            "skill": "ERP",
+            "category": "运维与服务器",
+            "aliases": [],
+            "regex": "\\bERP\\b",
+            "keywords": [
+                "企业管理系统",
+                "资源规划"
+            ]
+        },
+        {
+            "skill": "MES",
+            "category": "运维与服务器",
+            "aliases": [],
+            "regex": "\\bMES\\b",
+            "keywords": [
+                "生产管理系统",
+                "制造执行"
+            ]
+        },
+        {
+            "skill": "WMS",
+            "category": "运维与服务器",
+            "aliases": [],
+            "regex": "\\bWMS\\b",
+            "keywords": [
+                "仓储管理系统",
+                "库存管理"
+            ]
+        },
+        {
+            "skill": "ERP系统操作",
+            "category": "运维与服务器",
+            "aliases": [],
+            "regex": "ERP系统操作",
+            "keywords": [
+                "系统使用",
+                "企业软件"
+            ]
+        },
+        {
+            "skill": "信息系统实施",
+            "category": "运维与服务器",
+            "aliases": [],
+            "regex": "信息系统实施",
+            "keywords": [
+                "系统部署",
+                "项目实施"
+            ]
+        },
+        {
+            "skill": "Git",
+            "category": "开发工具",
+            "aliases": [
+                "github",
+                "gitlab"
+            ],
+            "regex": "\\b[Gg]it\\b",
+            "keywords": [
+                "版本控制",
+                "代码管理"
+            ]
+        },
+        {
+            "skill": "VS Code",
+            "category": "开发工具",
+            "aliases": [
+                "vscode"
+            ],
+            "regex": "\\bVS ?[Cc]ode\\b",
+            "keywords": [
+                "代码编辑器",
+                "IDE"
+            ]
+        },
+        {
+            "skill": "PyCharm",
+            "category": "开发工具",
+            "aliases": [],
+            "regex": "\\bPyCharm\\b",
+            "keywords": [
+                "Python编辑器",
+                "IDE"
+            ]
+        },
+        {
+            "skill": "IDEA",
+            "category": "开发工具",
+            "aliases": [],
+            "regex": "\\bIDEA\\b",
+            "keywords": [
+                "Java编辑器",
+                "IDE"
+            ]
+        },
+        {
+            "skill": "JIRA",
+            "category": "开发工具",
+            "aliases": [],
+            "regex": "\\bJIRA\\b",
+            "keywords": [
+                "项目管理",
+                "缺陷管理"
+            ]
+        },
+        {
+            "skill": "Xmind",
+            "category": "开发工具",
+            "aliases": [],
+            "regex": "\\bXmind\\b",
+            "keywords": [
+                "思维导图",
+                "需求分析"
+            ]
+        },
+        {
+            "skill": "Axure",
+            "category": "开发工具",
+            "aliases": [],
+            "regex": "\\bAxure\\b",
+            "keywords": [
+                "原型设计",
+                "产品原型"
+            ]
+        },
+        {
+            "skill": "Visio",
+            "category": "开发工具",
+            "aliases": [],
+            "regex": "\\bVisio\\b",
+            "keywords": [
+                "流程图",
+                "架构图"
+            ]
+        },
+        {
+            "skill": "AutoCAD",
+            "category": "开发工具",
+            "aliases": [],
+            "regex": "\\bAutoCAD\\b",
+            "keywords": [
+                "绘图软件",
+                "工程制图"
+            ]
+        },
+        {
+            "skill": "CAD",
+            "category": "开发工具",
+            "aliases": [],
+            "regex": "\\bCAD\\b",
+            "keywords": [
+                "计算机辅助设计",
+                "制图"
+            ]
+        },
+        {
+            "skill": "Photoshop",
+            "category": "开发工具",
+            "aliases": [
+                "PS"
+            ],
+            "regex": "\\b(Photoshop|PS)\\b",
+            "keywords": [
+                "图片处理",
+                "设计工具"
+            ]
+        },
+        {
+            "skill": "PS",
+            "category": "开发工具",
+            "aliases": [
+                "photoshop"
+            ],
+            "regex": "\\bPS\\b",
+            "keywords": [
+                "图片处理",
+                "设计工具"
+            ]
+        },
+        {
+            "skill": "淘宝运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "淘宝 ?运营",
+            "keywords": [
+                "电商运营",
+                "淘宝店铺"
+            ]
+        },
+        {
+            "skill": "天猫运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "天猫 ?运营",
+            "keywords": [
+                "电商运营",
+                "天猫店铺"
+            ]
+        },
+        {
+            "skill": "京东运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "京东 ?运营",
+            "keywords": [
+                "电商运营",
+                "京东店铺"
+            ]
+        },
+        {
+            "skill": "亚马逊运营",
+            "category": "平台运营",
+            "aliases": [
+                "Amazon运营"
+            ],
+            "regex": "亚马逊 ?运营|[Aa]mazon ?运营",
+            "keywords": [
+                "跨境电商",
+                "亚马逊店铺"
+            ]
+        },
+        {
+            "skill": "阿里巴巴国际站运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "阿里巴巴国际站 ?运营",
+            "keywords": [
+                "跨境电商",
+                "B2B运营"
+            ]
+        },
+        {
+            "skill": "抖音运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "抖音 ?运营",
+            "keywords": [
+                "短视频运营",
+                "新媒体运营"
+            ]
+        },
+        {
+            "skill": "小红书运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "小红书 ?运营",
+            "keywords": [
+                "种草运营",
+                "新媒体运营"
+            ]
+        },
+        {
+            "skill": "公众号运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "(?<!微信)公众号 ?运营",
+            "keywords": [
+                "微信运营",
+                "自媒体运营"
+            ]
+        },
+        {
+            "skill": "微信公众号运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "微信 ?公众号 ?运营",
+            "keywords": [
+                "微信运营",
+                "自媒体运营"
+            ]
+        },
+        {
+            "skill": "微博运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "微博 ?运营",
+            "keywords": [
+                "新媒体运营",
+                "社交平台运营"
+            ]
+        },
+        {
+            "skill": "电商平台运营",
+            "category": "平台运营",
+            "aliases": [],
+            "regex": "电商平台 ?运营",
+            "keywords": [
+                "电商管理",
+                "平台运维"
+            ]
+        },
+        {
+            "skill": "直通车",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "直通车",
+            "keywords": [
+                "淘宝推广",
+                "付费广告"
+            ]
+        },
+        {
+            "skill": "钻展",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "钻展",
+            "keywords": [
+                "淘宝广告",
+                "展示广告"
+            ]
+        },
+        {
+            "skill": "淘宝客",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "淘宝客",
+            "keywords": [
+                "佣金推广",
+                "电商带货"
+            ]
+        },
+        {
+            "skill": "超级推荐",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "超级推荐",
+            "keywords": [
+                "淘宝推广",
+                "智能推荐"
+            ]
+        },
+        {
+            "skill": "百度推广",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "百度 ?推广",
+            "keywords": [
+                "搜索引擎广告",
+                "付费推广"
+            ]
+        },
+        {
+            "skill": "信息流广告投放",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "信息流 ?广告 ?投放",
+            "keywords": [
+                "新媒体广告",
+                "精准投放"
+            ]
+        },
+        {
+            "skill": "Facebook广告投放",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "\\bFacebook\\b ?广告 ?投放",
+            "keywords": [
+                "海外广告",
+                "跨境推广"
+            ]
+        },
+        {
+            "skill": "Google广告投放",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "\\bGoogle\\b ?广告 ?投放",
+            "keywords": [
+                "海外广告",
+                "搜索引擎推广"
+            ]
+        },
+        {
+            "skill": "广告投放优化",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "广告 ?投放 ?优化",
+            "keywords": [
+                "广告优化",
+                "投放调整"
+            ]
+        },
+        {
+            "skill": "SEO",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "\\bSEO\\b(?!\\s*优化)",
+            "keywords": [
+                "搜索引擎优化",
+                "自然流量"
+            ]
+        },
+        {
+            "skill": "SEO优化",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "\\bSEO\\s*优化",
+            "keywords": [
+                "搜索引擎优化",
+                "流量优化"
+            ]
+        },
+        {
+            "skill": "搜索引擎优化",
+            "category": "广告投放",
+            "aliases": [],
+            "regex": "搜索引擎优化",
+            "keywords": [
+                "SEO",
+                "自然排名"
+            ]
+        },
+        {
+            "skill": "店铺运营",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "店铺 ?运营",
+            "keywords": [
+                "电商管理",
+                "店铺运维"
+            ]
+        },
+        {
+            "skill": "产品运营",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "产品 ?运营",
+            "keywords": [
+                "产品管理",
+                "用户增长"
+            ]
+        },
+        {
+            "skill": "内容运营",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "内容 ?运营",
+            "keywords": [
+                "内容创作",
+                "新媒体运营"
+            ]
+        },
+        {
+            "skill": "用户运营",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "用户 ?运营",
+            "keywords": [
+                "用户管理",
+                "用户增长"
+            ]
+        },
+        {
+            "skill": "社群运营",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "社群 ?运营",
+            "keywords": [
+                "社群管理",
+                "私域运营"
+            ]
+        },
+        {
+            "skill": "活动策划",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "活动 ?策划",
+            "keywords": [
+                "营销活动",
+                "活动执行"
+            ]
+        },
+        {
+            "skill": "活动企划",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "活动 ?企划",
+            "keywords": [
+                "活动方案",
+                "营销策划"
+            ]
+        },
+        {
+            "skill": "爆款打造",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "爆款 ?打造",
+            "keywords": [
+                "爆款运营",
+                "产品推广"
+            ]
+        },
+        {
+            "skill": "投放优化",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "(?<!广告 ?)投放 ?优化",
+            "keywords": [
+                "广告优化",
+                "流量优化"
+            ]
+        },
+        {
+            "skill": "流量引入",
+            "category": "运营能力",
+            "aliases": [],
+            "regex": "流量 ?引入",
+            "keywords": [
+                "引流",
+                "获客"
+            ]
+        },
+        {
+            "skill": "市场调研",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "市场 ?调研",
+            "keywords": [
+                "市场分析",
+                "数据调研"
+            ]
+        },
+        {
+            "skill": "市场分析",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "市场 ?分析",
+            "keywords": [
+                "市场研究",
+                "数据分析"
+            ]
+        },
+        {
+            "skill": "市场拓展",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "市场 ?拓展",
+            "keywords": [
+                "市场开发",
+                "业务拓展"
+            ]
+        },
+        {
+            "skill": "市场开拓",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "市场 ?开拓",
+            "keywords": [
+                "市场开发",
+                "新市场"
+            ]
+        },
+        {
+            "skill": "竞品分析",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "竞品 ?分析",
+            "keywords": [
+                "竞争对手分析",
+                "竞品调研"
+            ]
+        },
+        {
+            "skill": "竞争对手分析",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "竞争对手 ?分析",
+            "keywords": [
+                "竞品分析",
+                "市场调研"
+            ]
+        },
+        {
+            "skill": "营销策划",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "营销 ?策划",
+            "keywords": [
+                "市场策划",
+                "推广方案"
+            ]
+        },
+        {
+            "skill": "品牌推广",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "品牌 ?推广",
+            "keywords": [
+                "品牌营销",
+                "品牌建设"
+            ]
+        },
+        {
+            "skill": "市场营销",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "市场 ?营销",
+            "keywords": [
+                "市场推广",
+                "营销管理"
+            ]
+        },
+        {
+            "skill": "网络营销",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "网络 ?营销",
+            "keywords": [
+                "线上营销",
+                "互联网营销"
+            ]
+        },
+        {
+            "skill": "网络推广",
+            "category": "市场工作",
+            "aliases": [],
+            "regex": "网络 ?推广",
+            "keywords": [
+                "线上推广",
+                "互联网推广"
+            ]
+        },
+        {
+            "skill": "销售",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "销售",
+            "keywords": [
+                "销售业务",
+                "产品销售"
+            ]
+        },
+        {
+            "skill": "客户开发",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "客户 ?开发",
+            "keywords": [
+                "获客",
+                "新客户"
+            ]
+        },
+        {
+            "skill": "客户维护",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "客户 ?维护",
+            "keywords": [
+                "客户管理",
+                "老客户"
+            ]
+        },
+        {
+            "skill": "渠道管理",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "渠道 ?管理",
+            "keywords": [
+                "销售渠道",
+                "渠道运营"
+            ]
+        },
+        {
+            "skill": "渠道开拓",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "渠道 ?开拓",
+            "keywords": [
+                "渠道开发",
+                "新渠道"
+            ]
+        },
+        {
+            "skill": "经销商管理",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "经销商 ?管理",
+            "keywords": [
+                "渠道管理",
+                "代理商管理"
+            ]
+        },
+        {
+            "skill": "销售管理",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "销售 ?管理",
+            "keywords": [
+                "销售团队",
+                "销售管控"
+            ]
+        },
+        {
+            "skill": "销售策略",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "销售 ?策略",
+            "keywords": [
+                "销售方案",
+                "营销战略"
+            ]
+        },
+        {
+            "skill": "商务谈判",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "商务 ?谈判",
+            "keywords": [
+                "谈判沟通",
+                "商务合作"
+            ]
+        },
+        {
+            "skill": "谈判技巧",
+            "category": "销售工作",
+            "aliases": [],
+            "regex": "谈判 ?技巧",
+            "keywords": [
+                "商务谈判",
+                "沟通技巧"
+            ]
+        },
+        {
+            "skill": "招聘",
+            "category": "招聘配置",
+            "aliases": [
+                "人员招聘",
+                "岗位招聘"
+            ],
+            "regex": "招聘",
+            "keywords": [
+                "人才招聘",
+                "人员配置"
+            ]
+        },
+        {
+            "skill": "招聘管理",
+            "category": "招聘配置",
+            "aliases": [],
+            "regex": "招聘.*管理",
+            "keywords": [
+                "招聘流程",
+                "招聘管控"
+            ]
+        },
+        {
+            "skill": "简历筛选",
+            "category": "招聘配置",
+            "aliases": [
+                "简历过滤"
+            ],
+            "regex": "简历.*筛选",
+            "keywords": [
+                "简历审核",
+                "人才初选"
+            ]
+        },
+        {
+            "skill": "人才寻访",
+            "category": "招聘配置",
+            "aliases": [
+                "猎头寻访",
+                "人才挖掘"
+            ],
+            "regex": "人才.*寻访",
+            "keywords": [
+                "人才搜索",
+                "高端人才招聘"
+            ]
+        },
+        {
+            "skill": "背景调查",
+            "category": "招聘配置",
+            "aliases": [
+                "背调"
+            ],
+            "regex": "背景.*调查|背调",
+            "keywords": [
+                "入职背调",
+                "资质核查"
+            ]
+        },
+        {
+            "skill": "招聘渠道管理",
+            "category": "招聘配置",
+            "aliases": [],
+            "regex": "招聘渠道.*管理",
+            "keywords": [
+                "招聘平台",
+                "渠道维护"
+            ]
+        },
+        {
+            "skill": "培训",
+            "category": "培训发展",
+            "aliases": [
+                "员工培训",
+                "企业培训"
+            ],
+            "regex": "培训",
+            "keywords": [
+                "技能培训",
+                "人才培养"
+            ]
+        },
+        {
+            "skill": "培训管理",
+            "category": "培训发展",
+            "aliases": [],
+            "regex": "培训.*管理",
+            "keywords": [
+                "培训规划",
+                "培训执行"
+            ]
+        },
+        {
+            "skill": "课程开发",
+            "category": "培训发展",
+            "aliases": [
+                "培训课程设计"
+            ],
+            "regex": "课程.*开发",
+            "keywords": [
+                "课件制作",
+                "课程设计"
+            ]
+        },
+        {
+            "skill": "培训体系建立",
+            "category": "培训发展",
+            "aliases": [
+                "培训体系搭建"
+            ],
+            "regex": "培训体系.*(建立|搭建)",
+            "keywords": [
+                "培训体系",
+                "人才发展体系"
+            ]
+        },
+        {
+            "skill": "培训需求分析",
+            "category": "培训发展",
+            "aliases": [],
+            "regex": "培训需求.*分析",
+            "keywords": [
+                "需求调研",
+                "培训规划"
+            ]
+        },
+        {
+            "skill": "薪酬福利管理",
+            "category": "薪酬绩效",
+            "aliases": [
+                "薪资福利管理"
+            ],
+            "regex": "薪酬福利.*管理",
+            "keywords": [
+                "薪资管理",
+                "福利体系"
+            ]
+        },
+        {
+            "skill": "绩效管理",
+            "category": "薪酬绩效",
+            "aliases": [],
+            "regex": "绩效.*管理",
+            "keywords": [
+                "绩效考核管理",
+                "KPI管理"
+            ]
+        },
+        {
+            "skill": "绩效考核",
+            "category": "薪酬绩效",
+            "aliases": [
+                "KPI考核"
+            ],
+            "regex": "绩效.*考核",
+            "keywords": [
+                "业绩考核",
+                "员工评估"
+            ]
+        },
+        {
+            "skill": "薪酬核算",
+            "category": "薪酬绩效",
+            "aliases": [
+                "薪资核算"
+            ],
+            "regex": "薪酬.*核算",
+            "keywords": [
+                "工资计算",
+                "薪资结算"
+            ]
+        },
+        {
+            "skill": "考勤管理",
+            "category": "薪酬绩效",
+            "aliases": [],
+            "regex": "考勤.*管理",
+            "keywords": [
+                "打卡管理",
+                "出勤管理"
+            ]
+        },
+        {
+            "skill": "员工关系管理",
+            "category": "薪酬绩效",
+            "aliases": [],
+            "regex": "员工关系.*管理",
+            "keywords": [
+                "劳动关系",
+                "员工沟通"
+            ]
+        },
+        {
+            "skill": "员工入职离职管理",
+            "category": "人事事务",
+            "aliases": [
+                "入离职管理"
+            ],
+            "regex": "员工.*入职离职.*管理",
+            "keywords": [
+                "入离职手续",
+                "人事流程"
+            ]
+        },
+        {
+            "skill": "社保公积金办理",
+            "category": "人事事务",
+            "aliases": [
+                "五险一金办理"
+            ],
+            "regex": "社保公积金.*办理",
+            "keywords": [
+                "五险一金",
+                "社保缴纳"
+            ]
+        },
+        {
+            "skill": "人力资源数据分析",
+            "category": "人事事务",
+            "aliases": [],
+            "regex": "人力资源.*数据分析",
+            "keywords": [
+                "HR数据",
+                "人力分析"
+            ]
+        },
+        {
+            "skill": "人事信息管理",
+            "category": "人事事务",
+            "aliases": [
+                "员工信息管理"
+            ],
+            "regex": "人事信息.*管理",
+            "keywords": [
+                "人事档案",
+                "员工信息"
+            ]
+        },
+        {
+            "skill": "法律咨询",
+            "category": "法律事务",
+            "aliases": [
+                "法务咨询"
+            ],
+            "regex": "法律.*咨询",
+            "keywords": [
+                "法务支持",
+                "法律解答"
+            ]
+        },
+        {
+            "skill": "合同起草",
+            "category": "法律事务",
+            "aliases": [
+                "合同拟定"
+            ],
+            "regex": "合同.*起草",
+            "keywords": [
+                "合同撰写",
+                "协议拟定"
+            ]
+        },
+        {
+            "skill": "合同审查",
+            "category": "法律事务",
+            "aliases": [],
+            "regex": "合同.*审查",
+            "keywords": [
+                "合同审核",
+                "协议审查"
+            ]
+        },
+        {
+            "skill": "合同审核",
+            "category": "法律事务",
+            "aliases": [],
+            "regex": "合同.*审核",
+            "keywords": [
+                "合同审查",
+                "合规审核"
+            ]
+        },
+        {
+            "skill": "法律文书写作",
+            "category": "法律事务",
+            "aliases": [
+                "法务文书撰写"
+            ],
+            "regex": "法律文书.*写作",
+            "keywords": [
+                "法务文书",
+                "法律文件"
+            ]
+        },
+        {
+            "skill": "诉讼",
+            "category": "法律事务",
+            "aliases": [
+                "法律诉讼"
+            ],
+            "regex": "诉讼",
+            "keywords": [
+                "司法诉讼",
+                "打官司"
+            ]
+        },
+        {
+            "skill": "仲裁",
+            "category": "法律事务",
+            "aliases": [],
+            "regex": "仲裁",
+            "keywords": [
+                "劳动仲裁",
+                "商事仲裁"
+            ]
+        },
+        {
+            "skill": "诉讼代理",
+            "category": "法律事务",
+            "aliases": [],
+            "regex": "诉讼.*代理",
+            "keywords": [
+                "代理诉讼",
+                "法务代理"
+            ]
+        },
+        {
+            "skill": "非诉业务",
+            "category": "法律事务",
+            "aliases": [
+                "非诉讼业务"
+            ],
+            "regex": "非诉.*业务",
+            "keywords": [
+                "非诉讼法务",
+                "合规业务"
+            ]
+        },
+        {
+            "skill": "法律风险评估",
+            "category": "法律事务",
+            "aliases": [
+                "法务风险评估"
+            ],
+            "regex": "法律风险.*评估",
+            "keywords": [
+                "风险防控",
+                "合规评估"
+            ]
+        },
+        {
+            "skill": "专利申请",
+            "category": "知识产权",
+            "aliases": [],
+            "regex": "专利.*申请",
+            "keywords": [
+                "专利申报",
+                "知识产权申请"
+            ]
+        },
+        {
+            "skill": "专利撰写",
+            "category": "知识产权",
+            "aliases": [
+                "专利文书撰写"
+            ],
+            "regex": "专利.*撰写",
+            "keywords": [
+                "专利文件",
+                "知识产权文书"
+            ]
+        },
+        {
+            "skill": "专利检索",
+            "category": "知识产权",
+            "aliases": [],
+            "regex": "专利.*检索",
+            "keywords": [
+                "专利查询",
+                "知识产权检索"
+            ]
+        },
+        {
+            "skill": "专利分析",
+            "category": "知识产权",
+            "aliases": [],
+            "regex": "专利.*分析",
+            "keywords": [
+                "专利调研",
+                "知识产权分析"
+            ]
+        },
+        {
+            "skill": "专利审查",
+            "category": "知识产权",
+            "aliases": [],
+            "regex": "专利.*审查",
+            "keywords": [
+                "专利审核",
+                "知识产权审查"
+            ]
+        },
+        {
+            "skill": "专利诉讼",
+            "category": "知识产权",
+            "aliases": [],
+            "regex": "专利.*诉讼",
+            "keywords": [
+                "专利维权",
+                "知识产权诉讼"
+            ]
+        },
+        {
+            "skill": "专利无效",
+            "category": "知识产权",
+            "aliases": [],
+            "regex": "专利.*无效",
+            "keywords": [
+                "专利无效宣告",
+                "知识产权无效"
+            ]
+        },
+        {
+            "skill": "专利挖掘",
+            "category": "知识产权",
+            "aliases": [],
+            "regex": "专利.*挖掘",
+            "keywords": [
+                "专利布局",
+                "知识产权挖掘"
+            ]
+        },
+        {
+            "skill": "质量检验",
+            "category": "质量管理",
+            "aliases": [
+                "品质检验"
+            ],
+            "regex": "质量.*检验",
+            "keywords": [
+                "品质检测",
+                "出厂检验"
+            ]
+        },
+        {
+            "skill": "质量控制",
+            "category": "质量管理",
+            "aliases": [
+                "QC",
+                "品质控制"
+            ],
+            "regex": "质量.*控制|QC",
+            "keywords": [
+                "品质管理",
+                "生产质控"
+            ]
+        },
+        {
+            "skill": "QC七大手法",
+            "category": "质量管理",
+            "aliases": [
+                "品管七大手法"
+            ],
+            "regex": "QC七大手法",
+            "keywords": [
+                "质量工具",
+                "品管手法"
+            ]
+        },
+        {
+            "skill": "IATF16949",
+            "category": "质量管理",
+            "aliases": [],
+            "regex": "IATF16949",
+            "keywords": [
+                "汽车行业质量体系",
+                "质量标准"
+            ]
+        },
+        {
+            "skill": "ISO9001",
+            "category": "质量管理",
+            "aliases": [],
+            "regex": "ISO9001",
+            "keywords": [
+                "质量管理体系",
+                "国际质量标准"
+            ]
+        },
+        {
+            "skill": "FMEA",
+            "category": "质量管理",
+            "aliases": [
+                "失效模式分析"
+            ],
+            "regex": "FMEA",
+            "keywords": [
+                "失效模式与影响分析",
+                "质量风险分析"
+            ]
+        },
+        {
+            "skill": "SPC",
+            "category": "质量管理",
+            "aliases": [
+                "统计过程控制"
+            ],
+            "regex": "SPC",
+            "keywords": [
+                "过程控制",
+                "统计质量控制"
+            ]
+        },
+        {
+            "skill": "MSA",
+            "category": "质量管理",
+            "aliases": [
+                "测量系统分析"
+            ],
+            "regex": "MSA",
+            "keywords": [
+                "测量分析",
+                "量具分析"
+            ]
+        },
+        {
+            "skill": "APQP",
+            "category": "质量管理",
+            "aliases": [
+                "产品质量先期策划"
+            ],
+            "regex": "APQP",
+            "keywords": [
+                "质量策划",
+                "先期策划"
+            ]
+        },
+        {
+            "skill": "PPAP",
+            "category": "质量管理",
+            "aliases": [
+                "生产件批准程序"
+            ],
+            "regex": "PPAP",
+            "keywords": [
+                "件批准",
+                "生产批准"
+            ]
+        },
+        {
+            "skill": "8D报告",
+            "category": "质量管理",
+            "aliases": [
+                "8D问题解决"
+            ],
+            "regex": "8D报告",
+            "keywords": [
+                "问题分析报告",
+                "质量改善报告"
+            ]
+        },
+        {
+            "skill": "现场管理",
+            "category": "生产管理",
+            "aliases": [
+                "生产现场管理"
+            ],
+            "regex": "现场.*管理",
+            "keywords": [
+                "车间管理",
+                "生产现场"
+            ]
+        },
+        {
+            "skill": "设备管理",
+            "category": "生产管理",
+            "aliases": [
+                "生产设备管理"
+            ],
+            "regex": "设备.*管理",
+            "keywords": [
+                "设备运维",
+                "生产设备"
+            ]
+        },
+        {
+            "skill": "设备维护",
+            "category": "生产管理",
+            "aliases": [
+                "设备保养"
+            ],
+            "regex": "设备.*维护",
+            "keywords": [
+                "设备保养",
+                "设备维修"
+            ]
+        },
+        {
+            "skill": "设备调试",
+            "category": "生产管理",
+            "aliases": [],
+            "regex": "设备.*调试",
+            "keywords": [
+                "设备安装",
+                "设备调试"
+            ]
+        },
+        {
+            "skill": "危化安全生产",
+            "category": "生产管理",
+            "aliases": [
+                "危化品安全管理"
+            ],
+            "regex": "危化.*安全生产",
+            "keywords": [
+                "危化品管理",
+                "安全生产"
+            ]
+        },
+        {
+            "skill": "库存管理",
+            "category": "生产管理",
+            "aliases": [
+                "仓储管理"
+            ],
+            "regex": "库存.*管理",
+            "keywords": [
+                "仓库管理",
+                "物料管理"
+            ]
+        },
+        {
+            "skill": "供应链管理",
+            "category": "生产管理",
+            "aliases": [
+                "SCM"
+            ],
+            "regex": "供应链.*管理|SCM",
+            "keywords": [
+                "供应链",
+                "采购物流管理"
+            ]
+        },
+        {
+            "skill": "模拟电路",
+            "category": "硬件工程",
+            "aliases": [
+                "模拟电子技术"
+            ],
+            "regex": "模拟 ?(电路|电子技术)",
+            "keywords": [
+                "电子电路",
+                "硬件设计"
+            ]
+        },
+        {
+            "skill": "数字电路",
+            "category": "硬件工程",
+            "aliases": [
+                "数字电子技术"
+            ],
+            "regex": "数字 ?(电路|电子技术)",
+            "keywords": [
+                "电子电路",
+                "逻辑电路"
+            ]
+        },
+        {
+            "skill": "电气系统检查",
+            "category": "硬件工程",
+            "aliases": [
+                "电气检测"
+            ],
+            "regex": "电气系统 ?.* ?检查|电气 ?检测",
+            "keywords": [
+                "电气维护",
+                "电路检测"
+            ]
+        },
+        {
+            "skill": "硬件测试",
+            "category": "硬件工程",
+            "aliases": [],
+            "regex": "硬件 ?测试",
+            "keywords": [
+                "硬件验证",
+                "电路测试"
+            ]
+        },
+        {
+            "skill": "示波器",
+            "category": "硬件工程",
+            "aliases": [],
+            "regex": "示波器",
+            "keywords": [
+                "测试仪器",
+                "电子测量"
+            ]
+        },
+        {
+            "skill": "万用表",
+            "category": "硬件工程",
+            "aliases": [],
+            "regex": "万用表",
+            "keywords": [
+                "电子测量",
+                "电路检测"
+            ]
+        },
+        {
+            "skill": "量具使用",
+            "category": "硬件工程",
+            "aliases": [
+                "量具操作"
+            ],
+            "regex": "量具 ?.* ?(使用|操作)",
+            "keywords": [
+                "测量工具",
+                "精度测量"
+            ]
+        },
+        {
+            "skill": "机械设计",
+            "category": "机械工程",
+            "aliases": [],
+            "regex": "机械 ?设计",
+            "keywords": [
+                "结构设计",
+                "机械制图"
+            ]
+        },
+        {
+            "skill": "机械制造",
+            "category": "机械工程",
+            "aliases": [],
+            "regex": "机械 ?制造",
+            "keywords": [
+                "机械加工",
+                "生产制造"
+            ]
+        },
+        {
+            "skill": "汽车机械基础",
+            "category": "机械工程",
+            "aliases": [],
+            "regex": "汽车机械基础",
+            "keywords": [
+                "汽车机械",
+                "车辆工程"
+            ]
+        },
+        {
+            "skill": "CAD制图",
+            "category": "机械工程",
+            "aliases": [
+                "CAD绘图"
+            ],
+            "regex": "CAD ?(制图|绘图)",
+            "keywords": [
+                "计算机绘图",
+                "工程制图"
+            ]
+        },
+        {
+            "skill": "材料学",
+            "category": "机械工程",
+            "aliases": [
+                "材料科学"
+            ],
+            "regex": "材料(学|科学)",
+            "keywords": [
+                "材料性能",
+                "工程材料"
+            ]
+        },
+        {
+            "skill": "技术改造",
+            "category": "工程施工",
+            "aliases": [],
+            "regex": "技术 ?改造",
+            "keywords": [
+                "设备改造",
+                "技术升级"
+            ]
+        },
+        {
+            "skill": "试运行",
+            "category": "工程施工",
+            "aliases": [
+                "调试运行"
+            ],
+            "regex": "(试|调试) ?运行",
+            "keywords": [
+                "设备调试",
+                "开机调试"
+            ]
+        },
+        {
+            "skill": "大部件更换协助",
+            "category": "工程施工",
+            "aliases": [],
+            "regex": "大部件更换 ?.* ?协助",
+            "keywords": [
+                "设备维修",
+                "部件更换"
+            ]
+        },
+        {
+            "skill": "定期巡检",
+            "category": "工程施工",
+            "aliases": [
+                "日常巡检"
+            ],
+            "regex": "(定期|日常) ?巡检",
+            "keywords": [
+                "设备巡检",
+                "安全检查"
+            ]
+        },
+        {
+            "skill": "风机巡检",
+            "category": "工程施工",
+            "aliases": [],
+            "regex": "风机 ?巡检",
+            "keywords": [
+                "风机维护",
+                "设备检查"
+            ]
+        },
+        {
+            "skill": "故障处理",
+            "category": "工程施工",
+            "aliases": [
+                "故障维修"
+            ],
+            "regex": "故障 ?(处理|维修)",
+            "keywords": [
+                "设备维修",
+                "异常处理"
+            ]
+        },
+        {
+            "skill": "生物信息学",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "生物信息学",
+            "keywords": [
+                "生物信息",
+                "基因数据分析"
+            ]
+        },
+        {
+            "skill": "分子生物学",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "分子生物学",
+            "keywords": [
+                "分子实验",
+                "基因研究"
+            ]
+        },
+        {
+            "skill": "细胞生物学",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "细胞生物学",
+            "keywords": [
+                "细胞研究",
+                "细胞实验"
+            ]
+        },
+        {
+            "skill": "生物化学",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "生物化学",
+            "keywords": [
+                "生化实验",
+                "生物分析"
+            ]
+        },
+        {
+            "skill": "细胞培养",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "细胞 ?培养",
+            "keywords": [
+                "细胞实验",
+                "生物实验"
+            ]
+        },
+        {
+            "skill": "动物实验",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "动物 ?实验",
+            "keywords": [
+                "生物实验",
+                "动物建模"
+            ]
+        },
+        {
+            "skill": "基因编辑",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "基因 ?编辑",
+            "keywords": [
+                "基因工程",
+                "分子改造"
+            ]
+        },
+        {
+            "skill": "文献检索",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "文献 ?检索",
+            "keywords": [
+                "论文检索",
+                "科研文献"
+            ]
+        },
+        {
+            "skill": "科研项目管理",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "科研项目 ?.* ?管理",
+            "keywords": [
+                "项目管理",
+                "科研管理"
+            ]
+        },
+        {
+            "skill": "方法验证",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "方法 ?验证",
+            "keywords": [
+                "实验验证",
+                "方法确认"
+            ]
+        },
+        {
+            "skill": "理化检测",
+            "category": "生物科研",
+            "aliases": [],
+            "regex": "理化 ?检测",
+            "keywords": [
+                "物理化学检测",
+                "实验检测"
+            ]
+        },
+        {
+            "skill": "采样",
+            "category": "生物科研",
+            "aliases": [
+                "样品采集"
+            ],
+            "regex": "采样|样品 ?采集",
+            "keywords": [
+                "样品收集",
+                "样本采集"
+            ]
+        },
+        {
+            "skill": "Excel",
+            "category": "办公软件",
+            "aliases": [
+                "excel表格",
+                "Microsoft Excel"
+            ],
+            "regex": "\\b[Ee]xcel\\b",
+            "keywords": [
+                "数据整理",
+                "表格制作"
+            ]
+        },
+        {
+            "skill": "Word",
+            "category": "办公软件",
+            "aliases": [
+                "Microsoft Word"
+            ],
+            "regex": "\\b[Ww]ord\\b",
+            "keywords": [
+                "文档编辑",
+                "文字处理"
+            ]
+        },
+        {
+            "skill": "PPT",
+            "category": "办公软件",
+            "aliases": [
+                "PowerPoint",
+                "演示文稿"
+            ],
+            "regex": "\\bPPT\\b(?!\\s*制作)",
+            "keywords": [
+                "汇报制作",
+                "演示文稿"
+            ]
+        },
+        {
+            "skill": "PPT制作",
+            "category": "办公软件",
+            "aliases": [
+                "PowerPoint制作"
+            ],
+            "regex": "PPT ?.* ?制作|PowerPoint ?.* ?制作",
+            "keywords": [
+                "演示文稿制作",
+                "汇报设计"
+            ]
+        },
+        {
+            "skill": "Office",
+            "category": "办公软件",
+            "aliases": [],
+            "regex": "\\b[Oo]ffice\\b",
+            "keywords": [
+                "办公套件",
+                "办公软件"
+            ]
+        },
+        {
+            "skill": "Microsoft Office",
+            "category": "办公软件",
+            "aliases": [
+                "MS Office"
+            ],
+            "regex": "Microsoft ?Office|MS ?Office",
+            "keywords": [
+                "办公套件",
+                "微软办公软件"
+            ]
+        },
+        {
+            "skill": "办公软件操作",
+            "category": "办公软件",
+            "aliases": [],
+            "regex": "办公 ?软件 ?.* ?操作",
+            "keywords": [
+                "软件操作",
+                "办公技能"
+            ]
+        },
+        {
+            "skill": "熟练使用办公软件",
+            "category": "办公软件",
+            "aliases": [],
+            "regex": "熟练 ?使用 ?办公 ?软件",
+            "keywords": [
+                "办公软件操作",
+                "通用办公"
+            ]
+        },
+        {
+            "skill": "数据分析",
+            "category": "数据处理",
+            "aliases": [
+                "数据统计"
+            ],
+            "regex": "数据 ?.* ?分析(?!\\s*统计与分析)",
+            "keywords": [
+                "数据处理",
+                "数据统计"
+            ]
+        },
+        {
+            "skill": "数据统计与分析",
+            "category": "数据处理",
+            "aliases": [],
+            "regex": "数据 ?统计 ?与 ?分析",
+            "keywords": [
+                "数据统计",
+                "数据分析"
+            ]
+        },
+        {
+            "skill": "数据清洗",
+            "category": "数据处理",
+            "aliases": [],
+            "regex": "数据 ?清洗",
+            "keywords": [
+                "数据处理",
+                "数据整理"
+            ]
+        },
+        {
+            "skill": "数据挖掘",
+            "category": "数据处理",
+            "aliases": [],
+            "regex": "数据 ?挖掘",
+            "keywords": [
+                "数据探索",
+                "数据提取"
+            ]
+        },
+        {
+            "skill": "数据可视化",
+            "category": "数据处理",
+            "aliases": [
+                "图表可视化"
+            ],
+            "regex": "数据 ?可视化",
+            "keywords": [
+                "图表制作",
+                "数据展示"
+            ]
+        },
+        {
+            "skill": "Tableau",
+            "category": "数据处理",
+            "aliases": [],
+            "regex": "\\bTableau\\b",
+            "keywords": [
+                "数据可视化工具",
+                "数据分析工具"
+            ]
+        },
+        {
+            "skill": "SPSS",
+            "category": "数据处理",
+            "aliases": [],
+            "regex": "\\bSPSS\\b",
+            "keywords": [
+                "统计分析工具",
+                "数据统计"
+            ]
+        },
+        {
+            "skill": "SAS",
+            "category": "数据处理",
+            "aliases": [],
+            "regex": "\\bSAS\\b",
+            "keywords": [
+                "统计分析工具",
+                "数据挖掘"
+            ]
+        },
+        {
+            "skill": "文件管理",
+            "category": "通用办公",
+            "aliases": [
+                "文件整理"
+            ],
+            "regex": "文件 ?管理",
+            "keywords": [
+                "文件归档",
+                "文件整理"
+            ]
+        },
+        {
+            "skill": "公文写作",
+            "category": "通用办公",
+            "aliases": [
+                "公文撰写"
+            ],
+            "regex": "公文 ?写作",
+            "keywords": [
+                "公文处理",
+                "文字写作"
+            ]
+        },
+        {
+            "skill": "会议组织",
+            "category": "通用办公",
+            "aliases": [
+                "会议策划"
+            ],
+            "regex": "会议 ?组织",
+            "keywords": [
+                "会议筹备",
+                "会议安排"
+            ]
+        },
+        {
+            "skill": "档案管理",
+            "category": "通用办公",
+            "aliases": [],
+            "regex": "档案 ?管理",
+            "keywords": [
+                "档案整理",
+                "档案归档"
+            ]
+        },
+        {
+            "skill": "档案整理",
+            "category": "通用办公",
+            "aliases": [],
+            "regex": "档案 ?整理",
+            "keywords": [
+                "档案归档",
+                "档案管理"
+            ]
+        },
+        {
+            "skill": "档案数字化",
+            "category": "通用办公",
+            "aliases": [],
+            "regex": "档案 ?数字化",
+            "keywords": [
+                "档案电子化",
+                "数字化处理"
+            ]
+        },
+        {
+            "skill": "打字",
+            "category": "通用办公",
+            "aliases": [
+                "文字录入"
+            ],
+            "regex": "打字",
+            "keywords": [
+                "文字录入",
+                "键盘输入"
+            ]
+        },
+        {
+            "skill": "普通话标准",
+            "category": "通用办公",
+            "aliases": [
+                "标准普通话"
+            ],
+            "regex": "普通话 ?标准",
+            "keywords": [
+                "语言表达",
+                "普通话"
+            ]
+        },
+        {
+            "skill": "客户服务",
+            "category": "客户服务",
+            "aliases": [
+                "客服"
+            ],
+            "regex": "客户 ?服务|客服",
+            "keywords": [
+                "客户接待",
+                "服务支持"
+            ]
+        },
+        {
+            "skill": "在线客服",
+            "category": "客户服务",
+            "aliases": [
+                "线上客服"
+            ],
+            "regex": "在线 ?客服",
+            "keywords": [
+                "线上服务",
+                "客户咨询"
+            ]
+        },
+        {
+            "skill": "线上客服",
+            "category": "客户服务",
+            "aliases": [
+                "在线客服"
+            ],
+            "regex": "线上 ?客服",
+            "keywords": [
+                "在线服务",
+                "客户咨询"
+            ]
+        },
+        {
+            "skill": "客户投诉处理",
+            "category": "客户服务",
+            "aliases": [
+                "投诉处理"
+            ],
+            "regex": "客户投诉 ?.* ?处理",
+            "keywords": [
+                "投诉解决",
+                "客户安抚"
+            ]
+        },
+        {
+            "skill": "客户关系管理",
+            "category": "客户服务",
+            "aliases": [
+                "CRM"
+            ],
+            "regex": "客户关系 ?.* ?管理|\\bCRM\\b",
+            "keywords": [
+                "客户维护",
+                "客户管理"
+            ]
+        },
+        {
+            "skill": "商务接待",
+            "category": "客户服务",
+            "aliases": [],
+            "regex": "商务 ?接待",
+            "keywords": [
+                "接待服务",
+                "商务礼仪"
+            ]
+        },
+        {
+            "skill": "商务礼仪",
+            "category": "客户服务",
+            "aliases": [],
+            "regex": "商务 ?礼仪",
+            "keywords": [
+                "礼仪规范",
+                "商务接待"
+            ]
+        },
+        {
+            "skill": "供应商管理",
+            "category": "客户服务",
+            "aliases": [],
+            "regex": "供应商 ?管理",
+            "keywords": [
+                "供应商维护",
+                "合作管理"
+            ]
+        },
+        {
+            "skill": "供应商开发",
+            "category": "客户服务",
+            "aliases": [],
+            "regex": "供应商 ?开发",
+            "keywords": [
+                "新供应商开发",
+                "合作拓展"
+            ]
+        },
+        {
+            "skill": "招投标",
+            "category": "客户服务",
+            "aliases": [
+                "招标投标"
+            ],
+            "regex": "招投标|招标 ?投标",
+            "keywords": [
+                "招标",
+                "投标"
+            ]
+        },
+        {
+            "skill": "招标文件编制",
+            "category": "客户服务",
+            "aliases": [
+                "招标书编制"
+            ],
+            "regex": "招标文件 ?.* ?编制",
+            "keywords": [
+                "招标书制作",
+                "文件编制"
+            ]
+        },
+        {
+            "skill": "标书制作",
+            "category": "客户服务",
+            "aliases": [
+                "标书编制"
+            ],
+            "regex": "标书 ?制作",
+            "keywords": [
+                "投标文件",
+                "标书编制"
+            ]
+        },
+        {
+            "skill": "英语",
+            "category": "语言能力",
+            "aliases": [
+                "英语能力"
+            ],
+            "regex": "英语(?!\\s*(?:听说读写|翻译|能力))",
+            "keywords": [
+                "外语",
+                "英语交流"
+            ]
+        },
+        {
+            "skill": "英语听说读写",
+            "category": "语言能力",
+            "aliases": [
+                "英语听说读写能力"
+            ],
+            "regex": "英语 ?听说 ?读写(?: ?能力)?",
+            "keywords": [
+                "英语交流",
+                "英语应用"
+            ]
+        },
+        {
+            "skill": "英语翻译",
+            "category": "语言能力",
+            "aliases": [],
+            "regex": "英语 ?翻译",
+            "keywords": [
+                "翻译",
+                "英语转换"
+            ]
+        },
+        {
+            "skill": "中英文互译",
+            "category": "语言能力",
+            "aliases": [],
+            "regex": "中英文 ?互译",
+            "keywords": [
+                "翻译",
+                "双语转换"
+            ]
+        },
+        {
+            "skill": "笔译",
+            "category": "语言能力",
+            "aliases": [
+                "文字翻译"
+            ],
+            "regex": "笔译|文字 ?翻译",
+            "keywords": [
+                "翻译",
+                "文字转换"
+            ]
+        },
+        {
+            "skill": "同声传译",
+            "category": "语言能力",
+            "aliases": [
+                "同传"
+            ],
+            "regex": "同声 ?传译|同传",
+            "keywords": [
+                "翻译",
+                "实时翻译"
+            ]
+        },
+        {
+            "skill": "日语",
+            "category": "语言能力",
+            "aliases": [
+                "日语能力"
+            ],
+            "regex": "日语(?!\\s*(?:精通|商务))",
+            "keywords": [
+                "外语",
+                "日语交流"
+            ]
+        },
+        {
+            "skill": "商务日语",
+            "category": "语言能力",
+            "aliases": [],
+            "regex": "商务 ?日语",
+            "keywords": [
+                "日语",
+                "商务交流"
+            ]
+        },
+        {
+            "skill": "日语精通",
+            "category": "语言能力",
+            "aliases": [
+                "精通日语"
+            ],
+            "regex": "日语 ?精通|精通 ?日语",
+            "keywords": [
+                "日语",
+                "熟练应用"
+            ]
+        },
+        {
+            "skill": "法语",
+            "category": "语言能力",
+            "aliases": [
+                "法语能力"
+            ],
+            "regex": "法语",
+            "keywords": [
+                "外语",
+                "法语交流"
+            ]
+        },
+        {
+            "skill": "方言能力",
+            "category": "语言能力",
+            "aliases": [
+                "方言交流"
+            ],
+            "regex": "方言 ?(?:能力|交流)",
+            "keywords": [
+                "方言",
+                "地方语言交流"
+            ]
+        },
+        {
+            "skill": "项目管理",
+            "category": "综合能力",
+            "aliases": [
+                "PM",
+                "项目管控"
+            ],
+            "regex": "项目 ?管理|\\bPM\\b",
+            "keywords": [
+                "项目规划",
+                "团队管控"
+            ]
+        },
+        {
+            "skill": "团队管理",
+            "category": "综合能力",
+            "aliases": [
+                "团队管控"
+            ],
+            "regex": "团队 ?.* ?管理",
+            "keywords": [
+                "团队协调",
+                "人员管理"
+            ]
+        },
+        {
+            "skill": "成本控制",
+            "category": "综合能力",
+            "aliases": [
+                "成本管控"
+            ],
+            "regex": "成本 ?.* ?控制",
+            "keywords": [
+                "成本管理",
+                "费用控制"
+            ]
+        },
+        {
+            "skill": "财务管理",
+            "category": "综合能力",
+            "aliases": [],
+            "regex": "财务 ?.* ?管理",
+            "keywords": [
+                "财务管控",
+                "资金管理"
+            ]
+        },
+        {
+            "skill": "风险管理",
+            "category": "综合能力",
+            "aliases": [],
+            "regex": "风险 ?.* ?管理",
+            "keywords": [
+                "风险防控",
+                "风险评估"
+            ]
+        },
+        {
+            "skill": "流程优化",
+            "category": "综合能力",
+            "aliases": [
+                "流程改进"
+            ],
+            "regex": "流程 ?.* ?优化",
+            "keywords": [
+                "流程梳理",
+                "效率提升"
+            ]
+        },
+        {
+            "skill": "沟通协调",
+            "category": "综合能力",
+            "aliases": [
+                "沟通能力"
+            ],
+            "regex": "沟通 ?协调",
+            "keywords": [
+                "沟通",
+                "协调能力"
+            ]
+        },
+        {
+            "skill": "逻辑分析",
+            "category": "综合能力",
+            "aliases": [
+                "逻辑思维"
+            ],
+            "regex": "逻辑 ?分析",
+            "keywords": [
+                "逻辑思维",
+                "分析能力"
+            ]
+        },
+        {
+            "skill": "分析判断",
+            "category": "综合能力",
+            "aliases": [],
+            "regex": "分析 ?判断",
+            "keywords": [
+                "判断能力",
+                "分析能力"
+            ]
+        },
+        {
+            "skill": "执行力",
+            "category": "综合能力",
+            "aliases": [],
+            "regex": "执行力",
+            "keywords": [
+                "执行能力",
+                "任务落地"
+            ]
+        },
+        {
+            "skill": "团队合作精神",
+            "category": "综合能力",
+            "aliases": [
+                "团队合作",
+                "协作精神"
+            ],
+            "regex": "团队 ?合作 ?精神|团队 ?合作|协作 ?精神",
+            "keywords": [
+                "协作能力",
+                "团队意识"
+            ]
+        }
+    ]
+}

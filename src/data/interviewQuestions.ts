@@ -1,0 +1,581 @@
+export interface InterviewQuestionBank {
+  role: string;
+  category: string;
+  questions: {
+    question: string;
+    category: string;
+  }[];
+}
+
+export const INTERVIEW_GROUPS = [
+  { label: '技术研发', key: 'tech' },
+  { label: '产品与设计', key: 'product' },
+  { label: '数据与算法', key: 'data' },
+  { label: '运营与市场', key: 'ops' },
+  { label: '销售与商务', key: 'sales' },
+  { label: '职能支撑', key: 'support' },
+] as const;
+
+export type InterviewGroupKey = typeof INTERVIEW_GROUPS[number]['key'];
+
+export const INTERVIEW_ROLES: { value: string; label: string; group: InterviewGroupKey }[] = [
+  { value: 'Java开发', label: 'Java开发', group: 'tech' },
+  { value: 'Python开发', label: 'Python开发', group: 'tech' },
+  { value: 'C/C++开发', label: 'C/C++开发', group: 'tech' },
+  { value: '前端开发', label: '前端开发', group: 'tech' },
+  { value: '后端开发', label: '后端开发', group: 'tech' },
+  { value: '全栈开发', label: '全栈开发', group: 'tech' },
+  { value: 'Android开发', label: 'Android开发', group: 'tech' },
+  { value: 'iOS开发', label: 'iOS开发', group: 'tech' },
+  { value: '嵌入式开发', label: '嵌入式开发', group: 'tech' },
+  { value: '运维工程师', label: '运维工程师', group: 'tech' },
+  { value: '信息安全', label: '信息安全', group: 'tech' },
+  { value: '网络工程师', label: '网络工程师', group: 'tech' },
+  { value: '硬件工程师', label: '硬件工程师', group: 'tech' },
+  { value: '测试工程师', label: '测试工程师', group: 'tech' },
+  { value: '实施工程师', label: '实施工程师', group: 'tech' },
+  { value: '技术支持工程师', label: '技术支持工程师', group: 'tech' },
+  { value: '产品经理', label: '产品经理', group: 'product' },
+  { value: 'UI/UX设计师', label: 'UI/UX设计师', group: 'product' },
+  { value: '平面设计师', label: '平面设计师', group: 'product' },
+  { value: '视觉设计师', label: '视觉设计师', group: 'product' },
+  { value: '算法工程师', label: '算法工程师', group: 'data' },
+  { value: 'AI/机器学习', label: 'AI/机器学习', group: 'data' },
+  { value: '大数据开发', label: '大数据开发', group: 'data' },
+  { value: '数据分析师', label: '数据分析师', group: 'data' },
+  { value: 'BI工程师', label: 'BI工程师', group: 'data' },
+  { value: '商业分析师', label: '商业分析师', group: 'data' },
+  { value: '运营专员', label: '运营专员', group: 'ops' },
+  { value: '市场专员', label: '市场专员', group: 'ops' },
+  { value: '品牌专员', label: '品牌专员', group: 'ops' },
+  { value: '新媒体运营', label: '新媒体运营', group: 'ops' },
+  { value: '内容运营', label: '内容运营', group: 'ops' },
+  { value: '社区运营', label: '社区运营', group: 'ops' },
+  { value: '电商运营', label: '电商运营', group: 'ops' },
+  { value: '销售', label: '销售', group: 'sales' },
+  { value: '商务拓展', label: '商务拓展(BD)', group: 'sales' },
+  { value: '客户经理', label: '客户经理', group: 'sales' },
+  { value: '大客户销售', label: '大客户销售', group: 'sales' },
+  { value: '广告销售', label: '广告销售', group: 'sales' },
+  { value: 'HR', label: '人力资源', group: 'support' },
+  { value: '招聘专员', label: '招聘专员', group: 'support' },
+  { value: '财务', label: '财务', group: 'support' },
+  { value: '会计', label: '会计', group: 'support' },
+  { value: '法务', label: '法务', group: 'support' },
+  { value: '行政', label: '行政', group: 'support' },
+  { value: '供应链', label: '供应链', group: 'support' },
+  { value: '项目经理', label: '项目经理', group: 'support' },
+];
+
+export const QUESTION_BANK: InterviewQuestionBank[] = [
+  {
+    role: 'Java开发',
+    category: '技术研发',
+    questions: [
+      { question: '请介绍一下你对JVM内存模型的理解，以及在实际项目中如何进行JVM调优？', category: '底层原理' },
+      { question: 'Spring Boot中@Autowired和@Resource有什么区别？在什么场景下你会选择使用哪种注解？', category: '框架应用' },
+      { question: '请描述一个你遇到过的线上性能问题，你是如何定位和解决的？', category: '项目经验' },
+      { question: '谈谈你对微服务架构的理解，Spring Cloud中服务注册与发现是如何实现的？', category: '架构设计' },
+      { question: 'HashMap的底层实现原理是什么？JDK1.8相比1.7做了哪些优化？', category: '底层原理' },
+    ],
+  },
+  {
+    role: 'Python开发',
+    category: '技术研发',
+    questions: [
+      { question: 'Python中GIL是什么？它对多线程编程有什么影响？如何解决GIL带来的性能问题？', category: '底层原理' },
+      { question: '请解释Python中的装饰器原理，并举例说明你在项目中是如何使用装饰器的？', category: '语言特性' },
+      { question: 'Django和Flask有什么区别？在什么场景下你会选择哪个框架？', category: '框架应用' },
+      { question: '请描述Python中的垃圾回收机制，引用计数和分代回收是如何配合工作的？', category: '底层原理' },
+      { question: '你在项目中是如何处理Python异步编程的？async/await的使用场景有哪些？', category: '工程实践' },
+    ],
+  },
+  {
+    role: 'C/C++开发',
+    category: '技术研发',
+    questions: [
+      { question: '请解释C++中的智能指针类型，shared_ptr、unique_ptr和weak_ptr各自的使用场景是什么？', category: '语言特性' },
+      { question: 'C++11/14/17中你最喜欢的新特性是什么？请举例说明它在实际项目中的应用。', category: '语言特性' },
+      { question: '请描述虚函数的实现原理，虚函数表是如何工作的？', category: '底层原理' },
+      { question: '在C++中如何避免内存泄漏？你常用的内存调试工具有哪些？', category: '工程实践' },
+      { question: '请解释RAII机制，并说明它在资源管理中的重要性。', category: '设计模式' },
+    ],
+  },
+  {
+    role: '前端开发',
+    category: '技术研发',
+    questions: [
+      { question: '请解释React中Hooks的使用规则，useEffect的依赖数组是如何工作的？', category: '框架应用' },
+      { question: '浏览器从输入URL到页面渲染完成经历了哪些过程？请详细描述。', category: '底层原理' },
+      { question: '请解释前端性能优化的常用手段，你在项目中做过哪些优化？效果如何？', category: '工程实践' },
+      { question: 'TypeScript中泛型的使用场景有哪些？请举例说明。', category: '语言特性' },
+      { question: '请描述你在项目中是如何处理前端状态管理的？Redux和Context API你如何选择？', category: '架构设计' },
+    ],
+  },
+  {
+    role: '后端开发',
+    category: '技术研发',
+    questions: [
+      { question: '请解释RESTful API的设计原则，你在实际项目中是如何设计和版本管理API的？', category: '架构设计' },
+      { question: '数据库索引的底层原理是什么？如何判断一个查询是否走索引？', category: '底层原理' },
+      { question: '请描述分布式系统中的一致性问题，你了解哪些一致性算法？', category: '架构设计' },
+      { question: 'Redis有哪些数据结构？在什么场景下使用哪种数据结构？', category: '技术工具' },
+      { question: '请解释消息队列的作用，Kafka和RabbitMQ的区别是什么？', category: '技术工具' },
+    ],
+  },
+  {
+    role: '全栈开发',
+    category: '技术研发',
+    questions: [
+      { question: '作为全栈开发者，你如何平衡前后端的技术深度？请分享你的学习方法。', category: '职业发展' },
+      { question: '请描述一个你独立完成的从0到1的项目，包括技术选型和架构设计的决策过程。', category: '项目经验' },
+      { question: 'Next.js中SSR、SSG和ISR有什么区别？在什么场景下选择哪种渲染方式？', category: '框架应用' },
+      { question: '你如何设计一个全栈项目的CI/CD流程？', category: '工程实践' },
+      { question: '请解释前后端分离架构的优缺点，以及你如何处理跨域问题？', category: '架构设计' },
+    ],
+  },
+  {
+    role: 'Android开发',
+    category: '技术研发',
+    questions: [
+      { question: '请解释Android的Activity生命周期，在什么情况下会触发onRestart？', category: '基础知识' },
+      { question: 'Jetpack Compose和传统XML布局相比有什么优势？你在项目中是如何迁移的？', category: '框架应用' },
+      { question: '请描述Android中的内存泄漏常见场景，以及如何使用LeakCanary检测。', category: '工程实践' },
+      { question: 'Kotlin协程和RxJava在异步处理上有什么区别？你更倾向于使用哪种？', category: '技术选型' },
+      { question: '请解释Android的Handler机制，为什么说它可能导致内存泄漏？', category: '底层原理' },
+    ],
+  },
+  {
+    role: 'iOS开发',
+    category: '技术研发',
+    questions: [
+      { question: '请解释iOS中RunLoop的作用和运行机制。', category: '底层原理' },
+      { question: 'Swift中值类型和引用类型有什么区别？在什么场景下使用struct而非class？', category: '语言特性' },
+      { question: '请描述iOS中的内存管理机制，ARC是如何工作的？', category: '底层原理' },
+      { question: 'SwiftUI和UIKit相比有什么优势？你在项目中是如何选择的？', category: '框架应用' },
+      { question: '请解释iOS中的Runtime机制，Method Swizzling的使用场景和风险。', category: '底层原理' },
+    ],
+  },
+  {
+    role: '嵌入式开发',
+    category: '技术研发',
+    questions: [
+      { question: '请解释嵌入式系统中中断的工作原理，中断服务程序设计需要注意什么？', category: '基础知识' },
+      { question: '你在嵌入式项目中使用过哪些RTOS？FreeRTOS的任务调度机制是怎样的？', category: '技术工具' },
+      { question: '请描述I2C、SPI、UART三种通信协议的区别和适用场景。', category: '基础知识' },
+      { question: '嵌入式系统中如何处理内存受限的情况？你有哪些优化策略？', category: '工程实践' },
+      { question: '请解释看门狗定时器的作用，在什么情况下需要使用它？', category: '基础知识' },
+    ],
+  },
+  {
+    role: '运维工程师',
+    category: '技术研发',
+    questions: [
+      { question: '请解释Docker和虚拟机的区别，Docker的命名空间和cgroups是如何工作的？', category: '技术工具' },
+      { question: 'Kubernetes中Pod、Service、Deployment之间的关系是什么？', category: '技术工具' },
+      { question: '请描述你设计过的监控告警体系，使用了哪些工具？', category: '工程实践' },
+      { question: '如何处理线上服务的灰度发布和回滚？请描述具体流程。', category: '工程实践' },
+      { question: '请解释Linux中进程和线程的区别，如何查看系统资源使用情况？', category: '基础知识' },
+    ],
+  },
+  {
+    role: '信息安全',
+    category: '技术研发',
+    questions: [
+      { question: '请解释SQL注入的原理和防范措施，你在项目中是如何防御SQL注入的？', category: '安全攻防' },
+      { question: 'HTTPS的加密流程是什么？TLS握手过程是怎样的？', category: '安全原理' },
+      { question: '请描述XSS和CSRF攻击的区别，各自的防御方案是什么？', category: '安全攻防' },
+      { question: 'OWASP Top 10中你认为最容易被忽视的安全风险是什么？', category: '安全意识' },
+      { question: '请解释零信任安全模型的核心思想，与传统边界安全有什么区别？', category: '安全架构' },
+    ],
+  },
+  {
+    role: '网络工程师',
+    category: '技术研发',
+    questions: [
+      { question: '请解释OSI七层模型和TCP/IP四层模型的对应关系。', category: '基础知识' },
+      { question: 'TCP三次握手和四次挥手的过程是怎样的？为什么需要TIME_WAIT状态？', category: '基础知识' },
+      { question: '请描述VLAN的工作原理，以及跨VLAN通信的实现方式。', category: '网络技术' },
+      { question: 'BGP和OSPF路由协议的区别是什么？各自适用于什么场景？', category: '网络技术' },
+      { question: '请解释CDN的工作原理，如何选择合适的CDN节点？', category: '工程实践' },
+    ],
+  },
+  {
+    role: '硬件工程师',
+    category: '技术研发',
+    questions: [
+      { question: '请解释PCB设计中信号完整性的重要性，你如何处理高速信号走线？', category: '专业知识' },
+      { question: '请描述FPGA和ASIC的区别，在什么场景下选择哪种方案？', category: '技术选型' },
+      { question: '你在硬件设计中如何进行EMC/EMI设计？有哪些常用策略？', category: '工程实践' },
+      { question: '请解释模数转换器(ADC)的关键参数，如何根据应用场景选择ADC？', category: '专业知识' },
+      { question: '请描述你参与过的一个硬件项目从需求到量产的完整流程。', category: '项目经验' },
+    ],
+  },
+  {
+    role: '测试工程师',
+    category: '技术研发',
+    questions: [
+      { question: '请解释单元测试、集成测试和端到端测试的区别，你在项目中如何分配测试比例？', category: '测试理论' },
+      { question: '你使用过哪些自动化测试框架？Selenium和Playwright有什么区别？', category: '技术工具' },
+      { question: '请描述你发现过的一个复杂Bug的定位过程，你是如何缩小排查范围的？', category: '项目经验' },
+      { question: '什么是测试驱动开发(TDD)？你在实际项目中是否实践过？效果如何？', category: '工程实践' },
+      { question: '请解释性能测试的关键指标，如何设计一个压力测试方案？', category: '测试理论' },
+    ],
+  },
+  {
+    role: '实施工程师',
+    category: '技术研发',
+    questions: [
+      { question: '请描述你参与过的一个软件实施项目的完整流程，从需求确认到上线交付。', category: '项目经验' },
+      { question: '在实施过程中遇到客户需求与产品功能不匹配时，你如何处理？', category: '沟通协调' },
+      { question: '你如何制定实施计划和里程碑？如何管控实施风险？', category: '项目管理' },
+      { question: '请解释你进行用户培训的方法，如何确保用户能够熟练使用系统？', category: '客户服务' },
+      { question: '实施过程中如何处理数据迁移的完整性和一致性问题？', category: '技术能力' },
+    ],
+  },
+  {
+    role: '技术支持工程师',
+    category: '技术研发',
+    questions: [
+      { question: '请描述你处理过的一个紧急技术支持案例，你是如何快速定位和解决问题的？', category: '问题解决' },
+      { question: '你如何建立技术知识库来提升团队的支持效率？', category: '流程优化' },
+      { question: '面对情绪激动的客户，你如何进行有效的沟通和问题处理？', category: '沟通能力' },
+      { question: '你使用过哪些工单管理系统？如何设置优先级和SLA？', category: '技术工具' },
+      { question: '如何区分产品Bug和用户操作问题？你的排查思路是什么？', category: '问题解决' },
+    ],
+  },
+  {
+    role: '产品经理',
+    category: '产品与设计',
+    questions: [
+      { question: '请描述你从0到1做过的产品，包括市场调研、需求分析和产品设计的完整过程。', category: '产品思维' },
+      { question: '当开发资源有限时，你如何进行需求优先级排序？请举例说明。', category: '决策能力' },
+      { question: '你如何定义产品的核心指标？如何通过数据分析驱动产品迭代？', category: '数据驱动' },
+      { question: '请描述一次你处理需求冲突的经历，你是如何平衡各方利益的？', category: '沟通协调' },
+      { question: '你如何看待竞品分析？请分享你做竞品分析的方法论。', category: '产品思维' },
+    ],
+  },
+  {
+    role: 'UI/UX设计师',
+    category: '产品与设计',
+    questions: [
+      { question: '请描述你的设计流程，从需求理解到最终交付经历了哪些步骤？', category: '设计方法' },
+      { question: '你如何平衡用户体验和商业目标？请举一个实际案例。', category: '设计思维' },
+      { question: '请解释设计系统(Design System)的作用，你如何搭建和维护设计系统？', category: '工程实践' },
+      { question: '你如何进行用户研究和可用性测试？常用的方法有哪些？', category: '用户研究' },
+      { question: '请分享一个你通过设计优化提升转化率的案例。', category: '项目经验' },
+    ],
+  },
+  {
+    role: '平面设计师',
+    category: '产品与设计',
+    questions: [
+      { question: '请描述你的设计风格和设计理念，你是如何形成个人风格的？', category: '设计思维' },
+      { question: '当客户对设计稿不满意时，你如何沟通和调整？', category: '沟通能力' },
+      { question: '你如何保证设计作品的视觉一致性和品牌调性？', category: '设计方法' },
+      { question: '请分享一个你认为最成功的平面设计项目，你的设计思路是什么？', category: '项目经验' },
+      { question: '你如何跟进设计趋势？AI工具对平面设计行业有什么影响？', category: '行业洞察' },
+    ],
+  },
+  {
+    role: '视觉设计师',
+    category: '产品与设计',
+    questions: [
+      { question: '请解释视觉层级(Visual Hierarchy)的概念，你在设计中如何运用？', category: '设计理论' },
+      { question: '你如何处理多端适配的视觉设计问题？', category: '工程实践' },
+      { question: '动效设计在视觉体验中的作用是什么？你常用的动效工具有哪些？', category: '技术能力' },
+      { question: '请描述你与产品经理和开发协作的工作流程。', category: '团队协作' },
+      { question: '你如何通过视觉设计提升用户留存和转化？', category: '业务理解' },
+    ],
+  },
+  {
+    role: '算法工程师',
+    category: '数据与算法',
+    questions: [
+      { question: '请解释梯度下降法的原理，以及常见的优化器SGD、Adam的区别。', category: '算法理论' },
+      { question: '请描述你优化过的一个算法模型，从哪些维度进行了优化？效果如何？', category: '项目经验' },
+      { question: '如何处理训练数据中的类别不平衡问题？', category: '工程实践' },
+      { question: '请解释过拟合和欠拟合的区别，以及各自的解决方案。', category: '算法理论' },
+      { question: '你在实际项目中是如何评估模型效果的？常用的指标有哪些？', category: '工程实践' },
+    ],
+  },
+  {
+    role: 'AI/机器学习',
+    category: '数据与算法',
+    questions: [
+      { question: '请解释Transformer架构的核心思想，自注意力机制是如何工作的？', category: '算法理论' },
+      { question: '大语言模型的微调方法有哪些？LoRA和全量微调的区别是什么？', category: '技术前沿' },
+      { question: '请描述你部署AI模型的经验，如何处理推理延迟和吞吐量的平衡？', category: '工程实践' },
+      { question: '你如何看待AI伦理和安全问题？在项目中如何规避AI偏见？', category: '行业洞察' },
+      { question: 'RAG(检索增强生成)的原理是什么？你在什么场景下会使用RAG？', category: '技术前沿' },
+    ],
+  },
+  {
+    role: '大数据开发',
+    category: '数据与算法',
+    questions: [
+      { question: '请解释MapReduce的工作原理，以及Spark相比MapReduce的优势。', category: '技术原理' },
+      { question: '你使用过哪些大数据存储方案？HDFS、HBase和ClickHouse各自适用于什么场景？', category: '技术选型' },
+      { question: '请描述你设计过的一个数据管道，如何保证数据的实时性和准确性？', category: '项目经验' },
+      { question: 'Flink和Spark Streaming在流处理上有什么区别？', category: '技术工具' },
+      { question: '如何处理数据倾斜问题？你有哪些优化策略？', category: '工程实践' },
+    ],
+  },
+  {
+    role: '数据分析师',
+    category: '数据与算法',
+    questions: [
+      { question: '请描述你做过的最有价值的数据分析项目，你的分析框架是什么？', category: '项目经验' },
+      { question: '你如何确保数据分析结论的可靠性？如何避免相关性不等于因果性的陷阱？', category: '分析方法' },
+      { question: 'A/B测试的设计原则是什么？如何确定样本量和显著性水平？', category: '分析方法' },
+      { question: '你常用的数据可视化工具有哪些？如何选择合适的图表类型？', category: '技术工具' },
+      { question: '当数据质量存在问题时，你如何进行数据清洗和验证？', category: '工程实践' },
+    ],
+  },
+  {
+    role: 'BI工程师',
+    category: '数据与算法',
+    questions: [
+      { question: '请解释数据仓库的分层架构(ODS/DWD/DWS/ADS)，各层的职责是什么？', category: '架构设计' },
+      { question: '你使用过哪些BI工具？Tableau和Power BI的优缺点分别是什么？', category: '技术工具' },
+      { question: '如何设计一个支持多维分析的Cube？需要考虑哪些性能因素？', category: '工程实践' },
+      { question: '请描述你搭建BI报表体系的经验，如何保证数据的实时性？', category: '项目经验' },
+      { question: '缓慢变化维(SCD)有哪些处理策略？你通常选择哪种？', category: '数据建模' },
+    ],
+  },
+  {
+    role: '商业分析师',
+    category: '数据与算法',
+    questions: [
+      { question: '请描述你如何通过数据分析发现商业机会，请举一个具体案例。', category: '商业洞察' },
+      { question: '你如何进行竞品分析？常用的分析框架有哪些？', category: '分析方法' },
+      { question: '请解释你如何将业务需求转化为数据需求，并推动落地执行。', category: '业务理解' },
+      { question: '你如何评估一个商业模式是否可行？需要分析哪些维度？', category: '商业洞察' },
+      { question: '当分析结论与业务方预期不一致时，你如何沟通和推进？', category: '沟通能力' },
+    ],
+  },
+  {
+    role: '运营专员',
+    category: '运营与市场',
+    questions: [
+      { question: '请描述你做过的最成功的运营活动，你的策划思路和执行过程是什么？', category: '项目经验' },
+      { question: '你如何定义运营的核心指标？AARRR模型你是如何应用的？', category: '运营方法' },
+      { question: '当运营数据出现异常波动时，你的排查思路是什么？', category: '数据分析' },
+      { question: '你如何进行用户分层和精细化运营？', category: '运营方法' },
+      { question: '请分享你提升用户留存率的策略和实际效果。', category: '项目经验' },
+    ],
+  },
+  {
+    role: '市场专员',
+    category: '运营与市场',
+    questions: [
+      { question: '请描述你策划过的一个市场推广方案，包括目标、策略和效果评估。', category: '项目经验' },
+      { question: '你如何进行市场调研？常用的调研方法和工具有哪些？', category: '市场方法' },
+      { question: '如何衡量市场活动的ROI？你使用哪些指标来评估效果？', category: '数据分析' },
+      { question: '你如何制定品牌传播策略？请分享一个成功案例。', category: '品牌策略' },
+      { question: '在预算有限的情况下，你如何最大化市场推广效果？', category: '资源管理' },
+    ],
+  },
+  {
+    role: '品牌专员',
+    category: '运营与市场',
+    questions: [
+      { question: '你如何理解品牌定位？请描述你参与过的品牌定位项目。', category: '品牌理论' },
+      { question: '请分享你策划品牌传播活动的经验，如何选择传播渠道？', category: '项目经验' },
+      { question: '你如何评估品牌健康度？常用的品牌指标有哪些？', category: '品牌评估' },
+      { question: '当品牌遇到公关危机时，你如何制定应对策略？', category: '危机管理' },
+      { question: '你如何保证品牌在各个触点上的一致性？', category: '品牌管理' },
+    ],
+  },
+  {
+    role: '新媒体运营',
+    category: '运营与市场',
+    questions: [
+      { question: '你如何制定新媒体内容策略？不同平台的运营策略有什么差异？', category: '运营方法' },
+      { question: '请分享你打造爆款内容的经验，你的选题和创作方法论是什么？', category: '内容创作' },
+      { question: '你如何分析新媒体数据？重点关注哪些指标？', category: '数据分析' },
+      { question: '短视频和图文内容在运营策略上有什么区别？', category: '运营方法' },
+      { question: '你如何进行粉丝增长和社群运营？', category: '用户运营' },
+    ],
+  },
+  {
+    role: '内容运营',
+    category: '运营与市场',
+    questions: [
+      { question: '你如何制定内容规划和选题日历？', category: '运营方法' },
+      { question: '请分享你提升内容质量和产出的方法论。', category: '内容创作' },
+      { question: '你如何评估内容的效果？除了阅读量还关注哪些指标？', category: '数据分析' },
+      { question: 'AI工具对内容创作有什么影响？你如何利用AI辅助内容生产？', category: '行业洞察' },
+      { question: '你如何进行内容的SEO优化？', category: '技术能力' },
+    ],
+  },
+  {
+    role: '社区运营',
+    category: '运营与市场',
+    questions: [
+      { question: '你如何从0到1搭建一个社区？冷启动阶段的关键动作是什么？', category: '运营方法' },
+      { question: '如何提升社区用户的活跃度和留存率？', category: '用户运营' },
+      { question: '你如何处理社区中的负面言论和用户冲突？', category: '危机管理' },
+      { question: '请分享你培养社区KOC和核心用户的经验。', category: '用户运营' },
+      { question: '你如何衡量社区运营的效果？核心指标有哪些？', category: '数据分析' },
+    ],
+  },
+  {
+    role: '电商运营',
+    category: '运营与市场',
+    questions: [
+      { question: '请描述你策划过的一个电商大促活动，你的策略和执行过程是什么？', category: '项目经验' },
+      { question: '你如何优化商品详情页来提升转化率？', category: '运营方法' },
+      { question: '电商运营中你如何进行流量获取和ROI优化？', category: '数据分析' },
+      { question: '你如何管理供应链和库存，避免断货或积压？', category: '供应链管理' },
+      { question: '直播电商和传统电商在运营策略上有什么区别？', category: '行业洞察' },
+    ],
+  },
+  {
+    role: '销售',
+    category: '销售与商务',
+    questions: [
+      { question: '请描述你完成的最成功的一次销售，你的销售策略和谈判技巧是什么？', category: '销售技巧' },
+      { question: '你如何开发新客户？常用的获客渠道和方法有哪些？', category: '客户开发' },
+      { question: '当客户对价格提出异议时，你如何应对？', category: '谈判技巧' },
+      { question: '你如何管理销售漏斗？如何提高各阶段的转化率？', category: '销售管理' },
+      { question: '请分享你维护长期客户关系的经验。', category: '客户管理' },
+    ],
+  },
+  {
+    role: '商务拓展',
+    category: '销售与商务',
+    questions: [
+      { question: '请描述你完成的一个BD项目，从发现机会到最终签约的完整过程。', category: '项目经验' },
+      { question: '你如何寻找和评估潜在的合作伙伴？', category: '商业洞察' },
+      { question: '在商务谈判中，你如何处理双方利益分歧？', category: '谈判技巧' },
+      { question: '你如何评估一个合作项目的商业价值？', category: '商业分析' },
+      { question: '请分享你维护合作伙伴关系的经验。', category: '关系管理' },
+    ],
+  },
+  {
+    role: '客户经理',
+    category: '销售与商务',
+    questions: [
+      { question: '你如何理解客户经理的角色定位？与销售岗位有什么区别？', category: '职业认知' },
+      { question: '请描述你处理过的一个客户投诉案例，你的处理流程和结果是什么？', category: '客户服务' },
+      { question: '你如何挖掘老客户的增购机会？', category: '业务拓展' },
+      { question: '当客户需求超出服务范围时，你如何协调内部资源？', category: '沟通协调' },
+      { question: '你如何制定客户成功计划？', category: '客户管理' },
+    ],
+  },
+  {
+    role: '大客户销售',
+    category: '销售与商务',
+    questions: [
+      { question: '大客户销售与普通销售在策略上有什么区别？', category: '销售策略' },
+      { question: '请描述你攻克一个大型客户的完整过程，包括决策链分析。', category: '项目经验' },
+      { question: '你如何进行大客户的需求调研和方案设计？', category: '需求分析' },
+      { question: '大客户销售周期通常较长，你如何保持推进节奏？', category: '项目管理' },
+      { question: '当竞争对手也在跟进同一客户时，你如何建立差异化优势？', category: '竞争策略' },
+    ],
+  },
+  {
+    role: '广告销售',
+    category: '销售与商务',
+    questions: [
+      { question: '请解释程序化广告的运作流程，DSP和SSP分别是什么角色？', category: '行业知识' },
+      { question: '你如何向客户推荐广告投放方案？如何量化广告效果？', category: '销售技巧' },
+      { question: '信息流广告和搜索广告在售卖策略上有什么区别？', category: '行业知识' },
+      { question: '当广告效果不达预期时，你如何与客户沟通和优化？', category: '客户服务' },
+      { question: '你如何开发新的广告客户？常用的获客方式有哪些？', category: '客户开发' },
+    ],
+  },
+  {
+    role: 'HR',
+    category: '职能支撑',
+    questions: [
+      { question: '请描述你设计过的一个人力资源体系或制度，包括需求分析和落地过程。', category: '项目经验' },
+      { question: '你如何进行组织诊断和人才盘点？', category: 'HR专业' },
+      { question: '当业务部门与HR在招聘标准上存在分歧时，你如何协调？', category: '沟通协调' },
+      { question: '你如何设计有竞争力的薪酬体系？', category: '薪酬福利' },
+      { question: '你如何看待HRBP模式？与传统HR有什么区别？', category: '行业洞察' },
+    ],
+  },
+  {
+    role: '招聘专员',
+    category: '职能支撑',
+    questions: [
+      { question: '你如何制定招聘计划？如何确定人才画像？', category: '招聘方法' },
+      { question: '请分享你在高端人才寻访方面的经验和方法。', category: '人才寻访' },
+      { question: '你如何评估候选人的文化匹配度？', category: '面试评估' },
+      { question: '当核心岗位长期招不到人时，你会采取什么策略？', category: '问题解决' },
+      { question: '你如何优化招聘流程来提升候选人体验？', category: '流程优化' },
+    ],
+  },
+  {
+    role: '财务',
+    category: '职能支撑',
+    questions: [
+      { question: '请解释三大财务报表之间的关系，如何通过报表分析企业运营状况？', category: '专业知识' },
+      { question: '你如何进行财务预算编制和执行监控？', category: '预算管理' },
+      { question: '请描述你参与过的一个财务分析项目，你的分析框架是什么？', category: '项目经验' },
+      { question: '你如何进行成本控制和优化？', category: '成本管理' },
+      { question: '你使用过哪些财务系统？ERP上线过程中你扮演什么角色？', category: '技术工具' },
+    ],
+  },
+  {
+    role: '会计',
+    category: '职能支撑',
+    questions: [
+      { question: '请解释权责发生制和收付实现制的区别，在什么场景下使用哪种？', category: '专业知识' },
+      { question: '你如何确保账务处理的准确性和合规性？', category: '合规管理' },
+      { question: '请描述月末结账的完整流程，你如何保证按时完成？', category: '工作流程' },
+      { question: '新收入准则与旧准则有什么区别？对企业的财务报表有什么影响？', category: '专业知识' },
+      { question: '你如何进行税务筹划？有哪些合规的优化策略？', category: '税务管理' },
+    ],
+  },
+  {
+    role: '法务',
+    category: '职能支撑',
+    questions: [
+      { question: '请描述你审核过的一个复杂合同，你关注的核心条款和风险点是什么？', category: '合同管理' },
+      { question: '你如何处理知识产权纠纷？请分享一个实际案例。', category: '纠纷处理' },
+      { question: '数据安全和隐私保护方面，企业需要关注哪些法律合规要求？', category: '合规管理' },
+      { question: '当业务部门提出可能存在法律风险的需求时，你如何平衡业务需求和法律合规？', category: '沟通协调' },
+      { question: '你如何建立企业的法律风险防控体系？', category: '风险管控' },
+    ],
+  },
+  {
+    role: '行政',
+    category: '职能支撑',
+    questions: [
+      { question: '请描述你组织过的一个大型活动或会议，你的策划和执行过程是什么？', category: '项目经验' },
+      { question: '你如何优化行政流程来提升效率？', category: '流程优化' },
+      { question: '当多个部门同时提出行政需求时，你如何排定优先级？', category: '资源管理' },
+      { question: '你如何进行办公场地的规划和管理？', category: '空间管理' },
+      { question: '你如何控制行政费用预算？有哪些节约成本的策略？', category: '成本管理' },
+    ],
+  },
+  {
+    role: '供应链',
+    category: '职能支撑',
+    questions: [
+      { question: '请解释供应链管理的核心环节，你如何优化供应链效率？', category: '专业知识' },
+      { question: '你如何选择和评估供应商？关键指标有哪些？', category: '供应商管理' },
+      { question: '当供应链出现中断风险时，你如何制定应急预案？', category: '风险管理' },
+      { question: '你如何进行库存优化？如何平衡库存成本和缺货风险？', category: '库存管理' },
+      { question: '请描述你参与过的一个供应链数字化项目。', category: '项目经验' },
+    ],
+  },
+  {
+    role: '项目经理',
+    category: '职能支撑',
+    questions: [
+      { question: '请描述你管理过的一个复杂项目，包括范围管理、进度控制和风险应对。', category: '项目经验' },
+      { question: '敏捷和瀑布项目管理方法各适用于什么场景？你如何选择？', category: '方法论' },
+      { question: '当项目进度落后于计划时，你如何进行赶工和调整？', category: '进度管理' },
+      { question: '你如何处理跨部门项目中的利益冲突和资源争夺？', category: '沟通协调' },
+      { question: '你如何评估项目成功？除了按时交付还关注哪些维度？', category: '项目评估' },
+    ],
+  },
+];
+
+export function getQuestionsForRole(role: string): InterviewQuestionBank | undefined {
+  return QUESTION_BANK.find(b => b.role === role);
+}

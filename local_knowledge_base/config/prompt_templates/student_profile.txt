@@ -1,0 +1,28 @@
+你是一个专业的校园招聘专家。你的任务是从以下给定的【学生简历】中提取核心特征，构建结构化的学生能力画像。
+
+【提取要求】
+1. extracted_skills（掌握技能）：全面提取简历中提到的所有专业技能、工具名称、编程语言等，以字符串列表形式输出。
+2. certificates（持有证书）：提取简历中提到的所有专业证书、语言证书等。
+3. 软能力自我评价打分：请根据简历中描述的项目经历、校园活动等，推断该学生的五项软能力，打分范围 1-5（整数）：
+   - innovation (创新能力)
+   - learning (学习能力)
+   - stress (抗压能力)
+   - communication (沟通能力)
+   - internship (实习项目经验丰富度)
+
+【学生简历】
+{student_resume_text}
+
+【输出限制】
+严格输出为合法的JSON格式，禁止输出任何分析过程或Markdown标记。
+
+【预期JSON格式】
+{
+  extracted_skills [Python, 数据分析, 团队协作],
+  certificates [CET-6, 计算机二级],
+  innovation 3,
+  learning 4,
+  stress 3,
+  communication 4,
+  internship 4
+}
