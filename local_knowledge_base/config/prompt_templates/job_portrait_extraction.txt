@@ -1,0 +1,47 @@
+你是一个专业的岗位画像构建专家。请从以下职位描述(JD)中，精确提取12个维度的能力要求。
+
+【JD内容】
+{job_description}
+
+【输出格式】严格返回JSON，不要输出任何其他内容：
+{
+  "job_title": "职位名称",
+  "dimensions": {
+    "professional_skills": {"score": 0-100, "tags": ["技能1", "技能2"], "reason": "一句话说明打分依据"},
+    "certificate": {"score": 0-100, "tags": ["证书1"], "reason": "一句话说明打分依据"},
+    "innovation": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "learning": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "stress_tolerance": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "communication": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "internship": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "leadership": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "problem_solving": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "business_acumen": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "execution": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"},
+    "values_fit": {"score": 0-100, "tags": [], "reason": "一句话说明打分依据"}
+  }
+}
+
+【各维度说明】
+- professional_skills：对专业技术栈的要求深度（技能条数多/要求精深=高分）
+- certificate：明确要求或优先持证者得高分，完全未提及得0分
+- innovation：鼓励创新/研究/方案设计者得高分，纯执行操作岗得低分
+- learning：强调快速学习/自驱成长者得高分
+- stress_tolerance：提及加班/高强度/快节奏/deadline者得高分
+- communication：跨部门协作/汇报/客户沟通要求高者得高分
+- internship：明确要求实习经历或实践背景者得高分
+- leadership：管理岗/带团队/项目负责人得高分，纯执行岗得低分
+- problem_solving：要求独立分析/解决复杂问题者得高分
+- business_acumen：强调业务理解/商业化/客户价值者得高分
+- execution：强调结果导向/按时交付/落地能力者得高分
+- values_fit：强调文化认同/责任心/敬业精神/价值观匹配者得高分
+
+
+【reason字段要求】
+每个维度的reason用一句话（15-30字）说明该维度得分的具体依据，引用JD中的关键词。
+
+【评分规则】
+- score=0: JD中完全未提及
+- score=1-40: 轻微提及，非核心要求
+- score=41-70: 明确要求，中等权重
+- score=71-100: 强调要求，高权重关键能力

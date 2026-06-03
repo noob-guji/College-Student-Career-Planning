@@ -1,0 +1,25 @@
+diff --git a/node_modules/@met4citizen/talkinghead/modules/talkinghead.mjs b/node_modules/@met4citizen/talkinghead/modules/talkinghead.mjs
+index 441ddff..01676d7 100644
+--- a/node_modules/@met4citizen/talkinghead/modules/talkinghead.mjs
++++ b/node_modules/@met4citizen/talkinghead/modules/talkinghead.mjs
+@@ -2748,11 +2748,15 @@ class TalkingHead {
+   */
+   lipsyncGetProcessor(lang, path="./") {
+     if ( !this.lipsync.hasOwnProperty(lang) ) {
+-      const moduleName = path + 'lipsync-' + lang.toLowerCase() + '.mjs';
+-      const className = 'Lipsync' + lang.charAt(0).toUpperCase() + lang.slice(1);
+-      import(moduleName).then( module => {
+-        this.lipsync[lang] = new module[className];
+-      });
++      // PATCHED: Dynamic import replaced to avoid Turbopack build error.
++      // The lipsync modules are only needed when lipsyncModules is non-empty;
++      // this project passes lipsyncModules: [] so they are never used.
++      // Original code:
++      //   const moduleName = path + 'lipsync-' + lang.toLowerCase() + '.mjs';
++      //   const className = 'Lipsync' + lang.charAt(0).toUpperCase() + lang.slice(1);
++      //   import(moduleName).then( module => {
++      //     this.lipsync[lang] = new module[className];
++      //   });
+     }
+   }
+ 
