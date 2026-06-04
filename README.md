@@ -1,5 +1,8 @@
 <img src="public/logo4readme.png" width="700" align="left">
 
+
+
+
  The 17th China University Student Service Outsourcing Innovation and Entrepreneurship Competition
 
 **Work:** A Smart Career Planning System Driven by Multimodal AI《基于多模态大模型驱动的智慧职业规划系统》
