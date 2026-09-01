@@ -3,11 +3,11 @@
 
 
 
- The 17th China University Student Service Outsourcing Innovation and Entrepreneurship Competition
+2026年度中国青年科技创新“揭榜挂帅”擂台赛
 
-**Work:** A Smart Career Planning System Driven by Multimodal AI《基于多模态大模型驱动的智慧职业规划系统》
+**Work:** Wisdom Eye Career Navigation: An Intelligent Job-Candidate Decision System for New Position Discovery and Dynamic Competency Evolution《慧眼职航--面向新岗位发现与能力动态演化的人岗智能决策系统》
 
-**Track:** 【A13】基于AI的大学生职业规划智能体
+**Track:** 多源异构数据驱动岗位和能力图谱构建与动态演化分析研究
 
 **Introduction to the work:** Our team has developed a data-driven career planning system based on multimodal large models, and ingeniously created a multi-source, multimodal, multi-dimensional, multi-scale, and multi-module comprehensive intelligent career guidance and decision support system. Aim to fill the gaps in traditional career planning services, provide personalized career analysis and intelligent consulting services for college students, career seekers, and educational institutions, build an intelligent and humane career development service system, and achieve efficient career guidance and talent development.
 
