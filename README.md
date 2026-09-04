@@ -9,10 +9,31 @@
 
 **Track:** 多源异构数据驱动岗位和能力图谱构建与动态演化分析研究
 
-**Introduction to the work:** Our team has developed a data-driven career planning system based on multimodal large models, and ingeniously created a multi-source, multimodal, multi-dimensional, multi-scale, and multi-module comprehensive intelligent career guidance and decision support system. Aim to fill the gaps in traditional career planning services, provide personalized career analysis and intelligent consulting services for college students, career seekers, and educational institutions, build an intelligent and humane career development service system, and achieve efficient career guidance and talent development.
+**项目简介：** 团队面向"人工智能+就业服务"国家战略，针对大学生"就业难"与企业"人才荒"并存的结构性矛盾，自主研发了慧眼职航系统——一款以多模态大模型为引擎、以多源异构数据和岗位—技能知识图谱为底座的人岗智能决策系统。系统破解现有招聘平台与通用大模型在能力深层识别、岗位动态演化分析、精准人岗匹配与长期路径规划上的局限，贯通"岗位认知—自我评估—人岗匹配—差距诊断—生涯规划—求职训练"全链路，为高校学生、就业指导部门与企业 HR 提供"一人一策"的数字化职业指导服务。
 
-**The content included in this project:**
+**本项目核心内容包括：**
 
-1. Integrates five core modules: multi-channel personal information collection, 12-dimensional competency portrait assessment, job intelligence mapping, intelligent person-position matching, and customized career planning, to build a full-link digital career planning system.
-2. Leverages technologies such as Qwen large model, RAG knowledge base, and graph neural networks to achieve career path deduction, quantitative analysis of competency gaps, and precise identification of user strengths and weaknesses.
-3. Equipped with two practical training tools: AI consulting assistant and digital human simulation interview, providing one-stop services for career Q&A, resume parsing, and simulated interviews.
+**一、关键功能**
+- **岗位智绘**：基于 12 维原子能力模型自动生成岗位画像与雷达图，拆解岗位全部能力门槛与技能标签；
+- **岗位图谱**：可视化交互的垂直晋升 + 水平转岗双路径图谱，直观查看职业演化链路，转岗详情含相似度、转型周期、需补齐技能与薪资浮动；
+- **自我认知中心**：简历智能解析（PDF/Word/图片）、MBTI 测评与能力自评，自动构建求职者 12 维能力画像，输出能力完整度与综合竞争力评分；
+- **人岗匹配中心**：四维（基础要求、职业技能、职业素养、发展潜力）量化匹配 + 主观意愿（城市/薪资/岗位方向）加权，输出匹配评级、TOP-10 岗位推荐、能力差距清单与提升建议；
+- **生涯蓝图**：生成含匹配结论、职业定位、行业趋势、发展路径、行动计划、评估机制六大模块的个性化职业规划报告，支持智笔润色（三种文风）与 Word/PDF 导出；
+- **AI 数字人模拟面试**：岗位画像驱动的题库生成 → 数字人考官（TTS/ASR 语音交互）→ 实时评分与逐题点评 → AI 追问 → 面试报告，覆盖 12 维能力实时评测；
+- **智能问答与知识中枢**：图谱增强 GraphRAG 咨询问答（岗位要求、转岗路径、技能学习等），后台知识库统一管理岗位、图谱、技能本体数据。
+
+**二、关键技术**
+- **多源数据治理与一体化智能知识库**："格式清洗→文本去重→技能通胀识别（Bloom 分级）→时间衰减加权→结构化抽取→技能标准化"六级流水线，多源证据交叉验证与冲突消解，构建岗位结构库、岗位向量库（bge-large-zh + FAISS/Chroma）、岗位图谱库（Neo4j）、技能知识库与技能本体库五大子库；
+- **大模型基座与领域适配**：Qwen2.5-VL-72B（多模态简历/文档解析）+ Qwen2.5-Max（复杂推理与报告生成）双引擎协同，Dolphin-1.5 跨模态版面解析、LoRA 参数高效微调与原子化提示词工程完成垂直领域适配；
+- **新岗位发现与岗位能力动态演化**：时序快照 + 最小时间线覆盖（MinTCover）识别岗位"涌现起始点"，集成式变点检测（参数/非参/贝叶斯/时序 Transformer）置信度评估，RAG 证据绑定生成结构化岗位定义，人工审核闭环入库；既有岗位按时序快照差分比对识别新增/删除/修改能力项，证据溯源 + 版本固化 + 增量更新触发；
+- **岗位—技能双层全景图谱**：FP-Growth 频繁模式挖掘超边，时序感知动态超图神经网络（STA-GNN）学习岗位流转与技能需求演化规律，支持按技术栈/能力级别切换的多视图可视化；
+- **能力画像与细粒度匹配算法**：BERT-CRF 实体抽取 + 技能本体语义归一化，构建"原子技能→复合能力→综合能力"三层求职者能力知识图谱（情感词典 + 证据可信度双重加权），四维人岗匹配以最小技能点为粒度做双图谱对齐与差距拆解诊断，输出可溯源能力差距清单；
+- **大模型幻觉防控三级体系**：数据层 RAG 强制证据检索与证据绑定 → 推理层知识本体约束式生成 → 输出层 Fact-Gate 事实校验网关，配合 Self-RAG 式自我反思与二次修正，形成可信生成闭环；
+- **报告润色与全栈工程**：NLP 模块完整性校验 + 智能补全 + ERNIE 5.0 多风格润色 + 模板化导出；系统采用五层架构，FastAPI + Next.js/TailwindCSS，K8s 容器化部署，兼容高校就业平台标准化接口。
+
+**三、量化验证成果**
+- 沉淀真实招聘数据 2.1 万余条（原始语料 5 万余条）、1.1 万余条岗位画像，面向 1,243 名计算机专业学生开展试点应用；
+- 独立冻结 100 条岗位 JD 最终评测：解析准确率 **92.50%**（Java 91.75%、AI 93.33%），技术失败 0，与开发/验证集零重复，Precision/Recall/F1 均超 96%；
+- 简历提取、人岗匹配准确率均 ≥90%；200 条测试用例（130 条功能用例 + 70 条单元测试全部通过），语句覆盖率 93.71%、分支覆盖率 78.50%；
+
+
