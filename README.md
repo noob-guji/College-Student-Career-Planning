@@ -1,11 +1,11 @@
-<img src="public/logo4readme.png" width="700" align="left"> <br><br><br><br><br><br><br><br><br>
+<img src="public/newlogo.png" width="700" align="left"> <br><br><br><br><br><br><br><br><br>
 
 
 
 
 2026年度中国青年科技创新“揭榜挂帅”擂台赛
 
-**Work:** Wisdom Eye Career Navigation: An Intelligent Job-Candidate Decision System for New Position Discovery and Dynamic Competency Evolution《慧眼职航--面向新岗位发现与能力动态演化的人岗智能决策系统》
+**Work:**《慧眼职航--面向新岗位发现与能力动态演化的人岗智能决策系统》
 
 **Track:** 多源异构数据驱动岗位和能力图谱构建与动态演化分析研究
 
